@@ -58,8 +58,8 @@
 (setq org-publish-project-alist
       (list (list "jlab"
                   :recursive t
-                  :base-directory "../ content"
-                  :publishing-directory ". ./public"
+                  :base-directory "content"
+                  :publishing-directory "public"
                   :publishing-function 'org-ref-html-publish-to-html
                   :with-author nil
                   :with-creator nil
@@ -73,9 +73,10 @@
       org-html-head-include-default-style nil
       org-html-with-latex 'html
       bibtex-completion-bibliography "~/texmf/bibtex/bib/bibliography.bib"
-      org-latex-to-html-convert-command (format "%s %s" (dired-make-absolute "latex-template.sh") "%i")
+      org-latex-to-html-convert-command (format "%s %s" (dired-make-absolute "resources/latex-template.sh") "%i")
       org-html-prefer-user-labels t)
 
 (setq org-html-head (mapconcat 'identity '("<link rel='stylesheet' href='/assets/css/nlab.css'></link>") "\n"))
 
+(message (dired-make-absolute "../content"))
 (org-publish-all t)

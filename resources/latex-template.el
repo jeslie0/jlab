@@ -1,6 +1,17 @@
 (defun insert-latex-snippet (snippet)
   (let ((template  "\\documentclass{article}
 \\usepackage[pdftex,active,tightpage]{preview}
+\\usepackage{amsmath}
+\\usepackage{amsthm}
+\\usepackage{amsfonts}
+\\usepackage{amssymb}
+\\usepackage{bbm}
+\\usepackage{mathrsfs}
+\\usepackage{mathtools}
+\\usepackage{physics}
+\\usepackage{tikz-cd}
+\\usepackage{tikz}
+
 \\begin{document}
 \\begin{preview}
 %s
