@@ -2,8 +2,9 @@ body {
     font-family: "DejaVu Serif", "Cambria", Serif !important;
     font-size: 18px;
     text-align: justify;
-    background-color: #ECEFF4;
+    background-color: #D8DEE9;
     color: #2E3440;
+    margin-left: 1.0em;
 }
 
 p {
@@ -229,14 +230,14 @@ td, th {
 @media only screen and (max-width: 900px) {
     .navigation:not(.navfoot) {
         top: 60px;
-   }
+    }
     h1#pageName {
         margin-top: 120px;
-   }
-   .float_right_image {
+    }
+    .float_right_image {
         float: none;
         padding-top: 5px;
-   }
+    }
 }
 
 a[href="#navEnd"] {
@@ -296,4 +297,160 @@ mtext {
     font-family: STIX Two Math;
     src: local('STIX Two Math'), local('STIX2Math'),
          url('../fonts/STIX2Math.woff2'), url('../fonts/STIX2Math.woff');
+}
+
+
+.theorem:before {
+    counter-increment: theorem;
+    content: "Theorem " counter(theorem) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+
+.theorem {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.lemma {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.lemma:before {
+    counter-increment: theorem;
+    content: "Lemma " counter(theorem) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+
+.ex {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.ex:before {
+    counter-increment: theorem;
+    content: "Example " counter(theorem) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+
+.definition {
+    max-width: 50em;
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+    background: #eceff4;
+
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: #3b4252;
+    padding: 0.5em;
+}
+
+.definition:before {
+    counter-increment: theorem;
+    content: "Definition " counter(theorem) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+
+.proof{
+    display:block;
+    margin-left:10px;
+    margin-bottom:30px;
+    font-style:normal;
+    padding-bottom: 1rem;
+}
+.proof:before{
+    content:'Proof.\00a0\00a0';
+    float:left;
+    font-weight:bold;
+}
+.proof:after{
+    content:"\25A1";
+    float:right;
+}
+
+.proposition {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.proposition:before {
+    counter-increment: theorem;
+    content: "Proposition " counter(theorem) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+.corollary {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.corollary:before {
+    counter-increment: theorem;
+    content: "Corollary " counter(theorem) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+body {
+    counter-reset: theorem;
+}
+
+div.blue-box {
+    max-width: 50em;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: #5e81ac;
+    background: #f3f3ff;
+    padding: 0.5em;
+}
+
+div.yellow-box {
+    max-width: 50em;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: #ebcb8b;
+    background: #fffdf2;
+    padding: 0.5em;
+}
+
+div.red-box {
+    max-width: 50em;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: #bf616a;
+    background: #fff2f2;
+    padding: 0.5em;
+}
+
+div.green-box {
+    max-width: 50em;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: #a3be8c;
+    background: #f2fff2;
+    padding: 0.5em;
 }

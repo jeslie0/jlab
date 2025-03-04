@@ -11,6 +11,21 @@ Group theory is an area of [[id:c0844b39-e6cd-45c5-9135-495a9b017de7][Algebra]] 
 
 ** Classification of finite simple groups
 
+* Definition and basic results
+#+name: Group
+#+BEGIN_definition
+A *group* \(G\) is a set \(G\) equipped with the following data
+- a binary operation \(- \bullet - : G \times G \to G\);
+- a unary operation \((-)^{-1} : G \to G\);
+- an identity element \(e \in G\),
+
+such that the following hold:
+1. /Associativity/: for all \(g, h, k \in G\), \((g \bullet h) \bullet k = g \bullet (h \bullet k)\);
+2. /Identity/: for all \(g \in G\), \(g \bullet e = g = e \bullet g\);
+3. /Inverses/: for all \(g \in G\), \(g \bullet g^{-1} = g^{-1} \bullet g = e\).
+#+END_definition
+
+
 * Examples
 
 
