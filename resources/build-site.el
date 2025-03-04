@@ -58,8 +58,8 @@
 (setq org-publish-project-alist
       (list (list "jlab"
                   :recursive t
-                  :base-directory "content"
-                  :publishing-directory "./public"
+                  :base-directory "../ content"
+                  :publishing-directory ". ./public"
                   :publishing-function 'org-ref-html-publish-to-html
                   :with-author nil
                   :with-creator nil
