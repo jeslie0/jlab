@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       35905b70-c324-45f8-8f7c-ea459402bd73
+:END:
+#+title: Nietzsche
+Friedrich Nietzsche was a German philosopher.

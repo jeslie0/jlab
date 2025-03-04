@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       c0844b39-e6cd-45c5-9135-495a9b017de7
+:END:
+#+title: Algebra
+
+Algebra is a discipline of mathematics that deals with structure and equality. It is one of the cornerstones of pure mathematics, with the other fundamental one being analysis.

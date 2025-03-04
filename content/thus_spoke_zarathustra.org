@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       bb30487a-2fe7-4910-a49f-4b149dd067e2
+:END:
+#+title: Thus Spoke Zarathustra
+
+Thus Spoke Zarathustra: A Book for all and None is a work of philosophical fiction written by German philosopher [[id:35905b70-c324-45f8-8f7c-ea459402bd73][Friedrick Nietzsche]]. It deals with ideas such as the Ubermensch, the death of God and the will to power.

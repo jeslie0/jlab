@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       9847ece5-a56e-4e72-8fa9-a79515538e76
+:END:
+#+title: Group Theory
+#+filetags: :algebra:
+
+Group theory is an area of [[id:c0844b39-e6cd-45c5-9135-495a9b017de7][Algebra]] that deals with the study of symmetries, or more abstractly, automorphisms. 
+
+* Overview
+
+* Summary of important results
+
+** Classification of finite simple groups
+
+* Examples
+
+
+* References
+bibliography:bibliography.bib
