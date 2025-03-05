@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       0788fd30-3481-4a77-a965-a3bf7473db9c
+:END:
+#+title: Symmetric Group
+
+The symmetric group on \(n\) elements is the [[id:9847ece5-a56e-4e72-8fa9-a79515538e76][group]] of permutations of an \(n\) element set.
+
+* Definition
+#+begin_definition
+The *symmetric group* on \(n\) elements, denoted \(S_n\), consists of the set of bijections from the set \(\{0, \ldots, n-1\}\) to itself. The group operation is composition and the identity is the identity function.
+#+end_definition

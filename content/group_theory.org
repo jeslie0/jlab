@@ -23,11 +23,57 @@ such that the following hold:
 1. /Associativity/: for all \(g, h, k \in G\), \((g \bullet h) \bullet k = g \bullet (h \bullet k)\);
 2. /Identity/: for all \(g \in G\), \(g \bullet e = g = e \bullet g\);
 3. /Inverses/: for all \(g \in G\), \(g \bullet g^{-1} = g^{-1} \bullet g = e\).
+
+The *order* of a group \(G\), denoted \(|G|\), is the cardinality of the underlying set.
+
+The *order* of an element \(g \in G\) is the smallest natural number \(n\) such that:
+
+\[g^{n} \coloneqq \underbrace{g \bullet g \bullet \ldots \bullet g}_{n} = e.\]
 #+END_definition
 
+Often a group \((G, \bullet, e)\) is denoted just by its underlying carrier set \(G\).
 
-* Examples
+** Examples
 
+#+BEGIN_ex
+The automorphisms of an object form a group under composition.
+#+END_ex
+
+#+BEGIN_ex
+The integers \((\mathbb{Z}, +, 0)\) form a group under addition, with 0 as the identity.
+#+END_ex
+
+#+BEGIN_ex
+For any \(n \in \mathbb{N}\), \((\mathbb{Z}_n, +, 0)\) is a group.
+#+END_ex
+
+#+BEGIN_ex
+The [[id:0788fd30-3481-4a77-a965-a3bf7473db9c][symmetric group]] on \(n\) elements is a group.
+#+END_ex
+
+
+#+begin_ex
+The \(n^{\text{th}}\) *dihedral* group is the group of symmetries of the \(n\)-gon. It has \(2n\) elements: \(n\) rotations and \(n\) reflections.
+
+\[\begin{tikzpicture} 
+\node[shape=circle, draw=blue] (A) at (-1,1) {};
+\node[shape=circle, draw=blue] (B) at (1,1) {};
+\node[shape=circle, draw=blue] (C) at (1,-1) {};
+\node[shape=circle, draw=blue] (D) at (-1,-1) {};
+\node[] (E) at (2,2) {};
+\node[] (F) at (-2,-2) {};
+\node[] (G) at (0,2) {};
+\node[] (H) at (0,-2) {};
+\path [-] (A) edge (B);
+\path [-] (B) edge (C);
+\path [-] (C) edge (D);
+\path [-] (D) edge (A);
+\path [-] (E) edge (F);
+\path [-] (G) edge (H);
+\end{tikzpicture}\]
+
+The end
+#+end_ex
 
 * References
 bibliography:bibliography.bib

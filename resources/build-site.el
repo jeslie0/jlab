@@ -73,7 +73,7 @@
       org-html-head-include-default-style nil
       org-html-with-latex 'html
       bibtex-completion-bibliography "~/texmf/bibtex/bib/bibliography.bib"
-      org-latex-to-html-convert-command (format "%s %s" (dired-make-absolute "resources/latex-template.sh") "%i")
+      org-latex-to-html-convert-command (format "%s %s" (dired-make-absolute "resources/make-tex-frag.sh") "%i")
       org-html-prefer-user-labels t)
 
 (setq org-html-head (mapconcat 'identity '("<link rel='stylesheet' href='/assets/css/nlab.css'></link>") "\n"))
