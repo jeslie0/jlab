@@ -51,29 +51,6 @@ For any \(n \in \mathbb{N}\), \((\mathbb{Z}_n, +, 0)\) is a group.
 The [[id:0788fd30-3481-4a77-a965-a3bf7473db9c][symmetric group]] on \(n\) elements is a group.
 #+END_ex
 
-
 #+begin_ex
-The \(n^{\text{th}}\) *dihedral* group is the group of symmetries of the \(n\)-gon. It has \(2n\) elements: \(n\) rotations and \(n\) reflections.
-
-\[\begin{tikzpicture} 
-\node[shape=circle, draw=blue] (A) at (-1,1) {};
-\node[shape=circle, draw=blue] (B) at (1,1) {};
-\node[shape=circle, draw=blue] (C) at (1,-1) {};
-\node[shape=circle, draw=blue] (D) at (-1,-1) {};
-\node[] (E) at (2,2) {};
-\node[] (F) at (-2,-2) {};
-\node[] (G) at (0,2) {};
-\node[] (H) at (0,-2) {};
-\path [-] (A) edge (B);
-\path [-] (B) edge (C);
-\path [-] (C) edge (D);
-\path [-] (D) edge (A);
-\path [-] (E) edge (F);
-\path [-] (G) edge (H);
-\end{tikzpicture}\]
-
-The end
+The \(n^{\text{th}}\) [[id:ffa38abd-00f5-4f5c-b03d-e56c800a74ff][dihedral group]] is the group of symmetries of the \(n\)-gon.
 #+end_ex
-
-* References
-bibliography:bibliography.bib

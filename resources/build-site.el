@@ -54,10 +54,10 @@
                 ,@(plist-get plist :filter-final-output))))))))))
 
 
-
 (setq org-publish-project-alist
       (list (list "jlab"
                   :recursive t
+                  :auto-sitemap t
                   :base-directory "content"
                   :publishing-directory "public"
                   :publishing-function 'org-ref-html-publish-to-html
@@ -74,9 +74,11 @@
       org-html-with-latex 'html
       bibtex-completion-bibliography "~/texmf/bibtex/bib/bibliography.bib"
       org-latex-to-html-convert-command (format "%s %s" (dired-make-absolute "resources/make-tex-frag.sh") "%i")
-      org-html-prefer-user-labels t)
+      org-html-prefer-user-labels t
+      org-roam-directory (dired-make-absolute "content")
+      )
 
 (setq org-html-head (mapconcat 'identity '("<link rel='stylesheet' href='/assets/css/nlab.css'></link>") "\n"))
 
-(message (dired-make-absolute "../content"))
-(org-publish-all t)
+(message (dired-make-absolute "content"))
+(org-publish-all)
