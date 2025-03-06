@@ -83,7 +83,7 @@
  org-html-preamble "<navbar><img src='favicon.ico' class='site-logo'></img></navbar>"
  org-html-head (mapconcat
                 'identity
-                '("<link rel='stylesheet' href='/assets/css/nlab.css'></link>")
+                '("<link rel='stylesheet' href='assets/css/nlab.css'></link>")
                 "\n"
                 ))
 
