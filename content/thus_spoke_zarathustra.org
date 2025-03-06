@@ -4,3 +4,14 @@
 #+title: Thus Spoke Zarathustra
 
 Thus Spoke Zarathustra: A Book for all and None is a work of philosophical fiction written by German philosopher [[id:35905b70-c324-45f8-8f7c-ea459402bd73][Friedrick Nietzsche]]. It deals with ideas such as the Ubermensch, the death of God and the will to power.
+
+* Ubermensch
+:PROPERTIES:
+:ID:       1fd602f4-2130-472e-96cc-05403c41a9f7
+:END:
+The Ubermensch (or Superman in [[cite:&Nietzsche1964-cq]]) is Nietzsche's idea for the next step of mankind. In [[cite:&Nietzsche1964-cq]], mankind is something to be overcome and a higher ideal should be strived for.
+
+The opposite of the superman is the Ultimate Man.
+
+* References
+bibliography:bibliography.bib

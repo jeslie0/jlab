@@ -1,14 +1,15 @@
+:root {
+    --maxwidth: 60em;
+}
+
 body {
     font-family: "DejaVu Serif", "Cambria", Serif !important;
     font-size: 18px;
     text-align: justify;
     background-color: #fffffa;
     color: #2E3440;
-    margin-left: 1.0em;
-}
-
-p {
-    max-width: 50em;
+    max-width: var(--maxwidth);
+    margin: auto;
 }
 
 path {
@@ -301,6 +302,7 @@ mtext {
     content: "Theorem " counter(theorem) ".\00a0\00a0";
     font-weight: bold;
     font-style: normal;
+    float:left;
 }
 
 .theorem {
@@ -338,7 +340,7 @@ mtext {
 }
 
 .definition {
-    max-width: 50em;
+    /* max-width: var(--maxwidth); */
     display: block;
     margin: 12px 0;
     font-style: normal;
@@ -367,7 +369,7 @@ mtext {
     margin-bottom:30px;
     font-style:normal;
     padding-bottom: 1rem;
-    max-width: 50em;
+    max-width: var(--maxwidth);
 }
 
 .proof:before{
@@ -421,7 +423,7 @@ body {
 }
 
 div.blue-box {
-    max-width: 50em;
+    max-width: var(--maxwidth);
     border-style: solid;
     border-width: 3px;
     border-radius: 10px;
@@ -431,7 +433,7 @@ div.blue-box {
 }
 
 div.yellow-box {
-    max-width: 50em;
+    max-width: var(--maxwidth);
     border-style: solid;
     border-width: 3px;
     border-radius: 10px;
@@ -441,7 +443,7 @@ div.yellow-box {
 }
 
 div.red-box {
-    max-width: 50em;
+    max-width: var(--maxwidth);
     border-style: solid;
     border-width: 3px;
     border-radius: 10px;
@@ -451,11 +453,19 @@ div.red-box {
 }
 
 div.green-box {
-    max-width: 50em;
+    max-width: var(--maxwidth);
     border-style: solid;
     border-width: 3px;
     border-radius: 10px;
     border-color: #a3be8c;
     background: #f2fff2;
     padding: 0.5em;
+}
+
+img.site-logo {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 50px;
 }

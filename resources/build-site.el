@@ -66,6 +66,7 @@
                   :with-toc t
                   :section-numbers t
                   :time-stamp-file nil
+                  :async t
                   )))
 
 (setq org-html-validation-link nil
@@ -78,7 +79,13 @@
       org-roam-directory (dired-make-absolute "content")
       )
 
-(setq org-html-head (mapconcat 'identity '("<link rel='stylesheet' href='/assets/css/nlab.css'></link>") "\n"))
+(setq
+ org-html-preamble "<navbar><img src='favicon.ico' class='site-logo'></img></navbar>"
+ org-html-head (mapconcat
+                'identity
+                '("<link rel='stylesheet' href='/assets/css/nlab.css'></link>")
+                "\n"
+                ))
 
 (message (dired-make-absolute "content"))
-(org-publish-all)
+(org-publish-all t)

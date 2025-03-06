@@ -109,6 +109,7 @@ The number of left cosets of a subgroup \(H \leq G\) is called the *index* of \(
 
 \[ gH \coloneqq \{ gh \mid h \in H  \} \]
 
+#+name: lem-grouptheory-cosets-partition-a-group
 #+BEGIN_lemma
 Let \(H \leq G\) be a subgroup. Then the cosets \(gH\) partition the group \(G\).
 #+END_lemma
@@ -118,3 +119,1403 @@ Suppose that \(g \in aH\) and \(g \in bH\), for some \(a, b \in G\). Then some s
 
 Similarly, we can show that \(bH \subset aH\), and so \(aH = bH\). Therefore \(aH = bH\) or \(aH \cap bH = \emptyset\). It is also clear that every \(g \in G\) is in \(gH\), and so cosets partition \(G\).
 #+end_proof
+
+#+name: Lagrange's Theorem
+#+BEGIN_theorem
+/Lagrange's Theorem/. Let \(H \leq G\) be a subgroup of a finite group \(G\). Then \(|G| = [G : H] |H|\).
+#+END_theorem
+
+
+#+BEGIN_proof
+This follows from cosets partitioning their group, along with the fact that each coset has the same size.
+
+It is also clear that the function \(ah_{1} \mapsto bh_{1}\)  from \(aH \to bH\) is a bijection, and so any two left cosets of H have the same cardinality.
+#+END_proof
+
+#+BEGIN_corollary
+Suppose \(G\) is a finite group and \(g \in G\). Then, \(o(g) \mid |G|\).
+#+END_corollary
+
+#+BEGIN_proof
+The subgroup \(\langle g \rangle \leq G\) has order \(o(g)\) and so by [[id:6b435ffa-c898-4248-ab66-8be39e8ad82e][Lagrange's Theorem]], \(o(g)\) must divide \(|G|\).
+#+END_proof
+
+
+#+BEGIN_corollary
+Suppose \(G\) is a finite group. For all \(g \in G\), \(g^{|G|} = e\).
+#+END_corollary
+
+#+BEGIN_proof
+Since the order of \(g\) divides the \(|G|\), \(|G| = k \times o(g)\). So \(g^{|G|} = g^{k \times o(g)} = e^k = e\).
+#+END_proof
+
+#+BEGIN_corollary
+Let \(G\) be a finite group. If \(\abs{G}\) is prime, then \(G\) is cyclic.
+#+END_corollary
+#+BEGIN_proof
+If \(\abs{G}\) is prime, the only subgroups are \(\{e\}\) and \(G\). Since \(\langle g \rangle \leq G\) is non-trivial for non-identity elements \(g \in G\), it must be the whole group. Therefore, \(G\) is equal to a cyclic subgroup and is cyclic itself.
+#+END_proof
+
+Lagrange's Theorem can be used to prove Fermat's second most famous theorem.
+
+#+name: thm:group-theory:fermats-little-theorem}
+#+begin_theorem [Fermat's Little Theorem]
+If \(p\) is a prime and \(a \in \Z\), then \(a^{p} \equiv a \mod p\).
+#+end_theorem
+
+#+begin_proof
+This holds trivially for \(a = 0\), so assume \(a \not\equiv 0 mod p\). Then, \(g\) is in the multiplicative group of units \(\Z^{*}_{p}\), which has order \(p-1\). Since raising an element to the order of the group is the identity, \(a^{p-1} \equiv 1 \mod p\), and so \(a^{p} \equiv a \mod p\).
+#+end_proof
+
+Wilson's Theorem also follows as an application of Lagrange's Theorem.
+
+#+name: Wilson's Theorem
+#+begin_theorem
+If \(p\) is a prime number then the following hold:
+  1. In \(\Z^{*}_{p}\), only \(1\) and \(p-1\) are their own inverses.
+  2. \((p - 1)! \equiv -1 \mod p\).
+#+end_theorem
+
+#+begin_proof
+We prove both parts.
+1. Clearly, 1 and \(p-1\) are their own inverses. Take \(1 < a < p -1\). Neither \(a-1\) nor \(a+1\) are multiples of \(p\) and as \(p\) is prime, \((a-1)(a+1) = a^{2} -1\) is not a multiple of \(p\). Therefore, \(a^{2}-1 \not\equiv 0 \mod p\), and so \(a^{2} \not\equiv 1 \mod p\) proving that \(a\) is not its own inverse.
+
+2. This follows by a simple counting argument. Every element \(a \in \{2, \ldots, p-2\}\) can be paired up with its inverse, which is also in that range. Therefore, the product \((p-1)! \equiv p-1 \equiv -1 \mod p\).
+\end{enumerate}
+#+end_proof
+
+** Group homomorphisms
+:PROPERTIES:
+:ID:       9c1557ce-4667-426f-9ccf-9d671e5f6d4d
+:END:
+We now turn to the morphisms between groups.
+
+#+name: def:group-theory:group-homomorphism
+#+begin_definition
+Let \(G, H\) be groups. A function \(\phi : G \to H\) such that \(\phi(ab) = \phi(a) \phi(b)\), for all \(a, b \in G\) is a *group homomorphism*.
+#+end_definition
+
+#+begin_lemma
+Let \(\phi : G \to H\) be a group homomorphism. Then the following hold:
+1. \(\phi(e) = e\) and \(\phi(g^{-1}) = \phi(g) ^{-1}\).
+2. If \(\phi\) is injective, then \(o(g) = o\left(\phi(g)\right)\).
+#+end_lemma
+
+#+begin_proof
+1. We have the following equalities hold:
+ 
+\[\begin{align*}
+  \phi(e) &= \phi(ee) \\
+       &= \phi(e) \phi(e).
+\end{align*}\]
+
+Therefore, we can apply \(\phi(e)^{-1}\) to both sides of the equation and cancel to get \(\phi(e) = e\). Recalling that inverses are unique, \(\phi(g)\phi(g^{-1}) = \phi(gg^{-1}) = \phi(e) = e\). Applying the similar proof by multiplying \(\phi(g)\) on the left, we deduce that \(\phi(g^{-1}) - \phi(g)^{-1}\).
+
+2. Suppose that \(o(\phi(g)) = n\). Then, \(e = \phi(e) = \phi(g)^{n} = \phi(g^{n})\), and so by injectivity of \(\phi\), \(e = g^{n}\). Suppose there exists \(0 < k < n\) such that \(g^{k} = e\). Then, \(e = \phi(e) = \phi(g^{k}) = \phi(g)^{k}\), which contradicts \(n\) being the order of \(o(\phi(g))\). Hence \(n\) is the order of \(g\).
+#+end_proof
+
+#+begin_ex
+Let \(C_{n}\) be the *cyclic group of order \(n\)*, which is defined as the set of rotations of the equilateral \(n\)-gon. If \(g\) is a rotation by \(2 \pi /n \) radians, then \(C_{n} \coloneqq \langle g \rangle\).
+The function
+
+\[\begin{align*}
+  \phi : \Z &\to C_{n} \\
+  a &\mapsto g^{a}
+\end{align*}\]
+
+is a group homomorphism.
+#+end_ex
+
+#+name: def:group-theory:group-isomorphism
+#+begin_definition
+Let \(G, H\) be groups and \(\psi : G \to H\) a group homomorphism. We say that \(\phi\) is a *group isomorphism* if there is a group homomorphism \(\psi\) such that \(phi\) and \(\psi\) are inverse functions.
+
+If there exists an isomorphism \(\psi : G \to H\), we say \(G\) and \(H\) are *isomorphic as groups*, and write \(G \iso H\).
+#+end_definition
+
+#+name: lem:group-theory:groups-of-order-p-are-isomorphic
+#+begin_lemma
+If \(p\) is a prime number, then all groups of order \(p\) are isomorphic.
+#+end_lemma
+
+#+begin_proof
+Let \(G, H\) be groups of order \(p\). Then, every non-identity element has order \(p\), since by Lagrange's Theorem every non-trivial subgroup is equal to the whole group. Choose a non-identity element \(g \in G\) and \(h \in H\). The function mapping \(g^{n} \mapsto h^{n}\) is well defined and is a bijective group homomorphism. Hence, \(G \iso H\).
+#+end_proof
+
+#+begin_lemma
+All cyclic groups of order \(n\) are isomorphic.
+#+end_lemma
+
+#+begin_proof
+This is the same proof as Lemma~\ref{lem:group-theory:groups-of-order-p-are-isomorphic}.
+#+end_proof
+
+Given a group homomorphism, we can always extract a new group from it.
+#+begin_definition
+Let \(\phi:G \to H\) be a group homomorphism. The *kernel* of \(\phi\) is the subset \(\{g \in G \mid \phi(g_) = e\}\).
+#+end_definition
+
+#+name: lem:group-theory:kernels-are-subgroups
+#+begin_lemma
+The kernel of a homomorphism \(\phi : G \to H\) (denoted \(\ker(\phi)\)) is a subgroup of \(G\).
+#+end_lemma
+#+begin_proof
+Clearly, for all \(g, h \in \ker(\phi)\) we have that \(\phi(gh^{-1}) = \phi(g)\phi(h)^{-1} = e\), and as \(e \in \ker(\phi)\), \(\ker (\phi)\) is a subgroup of \(G\).
+#+end_proof
+
+#+begin_lemma
+A group homomorphism \(\phi : G \to H\) is injective if and only if \(\ker{\phi} = \{e\}\).
+#+end_lemma
+#+begin_proof
+Supposing that \(\phi\) is injective, as \(\phi(e) = e\), all elements of the kernel (which are of the form \(\phi(g)\)) must be equal to \(e\).
+
+Assuming the kernel is trivial, \(\phi(g) = \phi(h)\) implies \(\phi(gh^{-1}) = e\), and so \(gh^{-1} = e\). Therefore, \(g = h\) and \(\phi\) is injective.
+#+end_proof
+
+#+begin_definition
+Let \(\phi : G \to H\) be a group homomorphism. The *image* of \(\phi\) is defined as \(\{\phi(g) \in H \mid g \in G\}\), and is denoted \(\Im \phi\).
+#+end_definition
+
+#+begin_lemma
+Let \(\phi : G \to H\) be a group homomorphism. The \(\Im \phi\) is a subgroup of \(H\).
+#+end_lemma
+
+#+begin_proof
+Let \(g, h \in \Im \phi\). Then \(gh^{-1} = \phi(a)\phi(b)^{-1} = \phi(ab^{-1})\), for some \(a,b \in G\). As \(e = \phi(e) \in \Im \phi\), \(\Im \phi\) is non-empty and by the Subgroup Criterion, \(\Im \phi\) is a subgroup of \(H\).
+#+end_proof
+
+#+name: def:group-theory:automorphism-group
+#+begin_definition
+Let \(G\) be a group. The set of all isomorphisms \(\phi : G \to G\) forms a group with composition and inverses, and is called the *automorphisms group* of \(G\), denoted \(\Aut (G)\).
+#+end_definition
+
+#+begin_ex
+For prime \(p\), \(\Aut(C_{p}) \iso \Z^{*}_{p} \iso C_{p-1}\).
+#+end_ex
+
+#+begin_definition
+Let \(G, H\) be groups. The *product group* \(G \times H\) is the group of pairs of elements \(g \in G, h \in H\), with group operations defined pointwise.
+
+We also say that \(G \times H\) is the *external direct product*.
+#+end_definition
+
+#+name: def:group-theory:internal-direct-product
+#+begin_definition 
+Let \(H\) and \(K\) be subgroups of a group \(G\), such that \(H \cup K = \{e\}\), and that \(hk=kh\) for all \(h \in H\), \(k \in K\). Then we say that \(G\) is the \indx{internal direct product} of \(H\) and \(K\) if \(G = \{hk \mid h \in H, k \in K\}\).
+#+end_definition
+
+#+begin_lemma
+If \(G\) is the internal direct product of \(H, K\) then each element of \(G\) can be written uniquely in the form \(g = hk\) for some \(h \in H\) and \(k \in K\). This gives rise to an isomorphism \(G \iso H \times K\).
+#+end_lemma
+
+#+begin_proof
+Since \(G = HK\), for every \(g \in G\), there does exist a pair \((h,k) \in H \times K\) such that \(g = hk\). If another pair \((h',k')\) with this property existed, then \(hk = h'k'\) and \(hh'^{-1} = k'k^{-1}\), meaning that since the left hand side belongs to \(H\) and the right to \(K\), both must be equal to the identity, proving uniqueness. The map \(G \to H \times K\) defined by this is then a bijection. Routine computation shows this is a group homomorphism.
+#+end_proof
+
+#+begin_ex
+For coprime \(m, n\), \(C_{m} \times C_{n} \iso C_{mn}\). The element \((1,1) \in C_{m} \times C_{n}\) must have order \(mn\), hence \(\langle (1,1)\rangle= \C_{m} \times C_{n}\) is isomorphic to the cyclic group of order \(mn\). If there is a \(1 < k < mn\) such that \((1,1)^{k} = (0,0)\), then \(k\) would need to share a factor of both \(m\) and \(n\), which would contradict coprimality.
+#+end_ex
+
+
+* Isomorphism theorems for groups
+:PROPERTIES:
+:ID:       a6886f24-7117-4247-b8c4-8f0ec8cca2c7
+:END:
+
+Arguably, the most important type of subgroup is the normal subgroup.
+
+#+name: def:group-theory:normal-subgroup
+#+begin_definition 
+A subgroup \(H \leq G\) is said to be \indx{normal} if \(gH = Hg\) for all \(g \in G\). We denote this by \(H \triangleleft G\).
+#+end_definition
+
+#+name: lem:group-theory:normal-subgroup-criterion
+#+begin_lemma
+A subgroup \(H \leq G\) is normal if and only if for all \(g \in G\), \(h \in H\), we have \(g^{-1}hg \in H\).
+#+end_lemma
+
+#+begin_proof
+Suppose that \(H \triangleleft G\) is a normal subgroup and let \(g \in G\) and \(h \in H\). Since \(gH = Hg\) if and only if \(H = g^{-1}Hg\) and \(g^{-1}hg \in  g^{-1}Hg\), we have \(g^{-1}Hg \in H\), as required.
+
+Now, assuming that \(g^{-1}hg \in H\) for all \(g \in G\), \(h \in H\), we have that \(g^{-1} H g \subset H\). However, as \(H = g^{-1}gHg^{-1}g \subset g^{-1}Hg\), we must have that \(H = g^{-1}Hg\) and so \(gH = Hg\), proving that \(H\) is normal in \(G\).
+#+end_proof
+
+#+name: ex:group-theory:normal-subgroups
+#+begin_ex [Examples of normal subgroups]
+1. For any group \(G\), the centre \(Z(G)\) is normal, since every \(g \in G\) commutes with all elements in \(Z(G)\).
+2. Any subgroup of an abelian group is normal.
+#+end_ex
+
+As left and right cosets are the same for a normal subgroup \(N \triangleleft G\), we typically just refer to them as ``cosets'', choosing to work with left cosets if necessary.
+
+#+name: def:group-theory:quotient-group
+#+begin_definition
+Let \(N \triangleleft G\) be a normal subgroup. The set of cosets is denoted \(G / N\) and has a canonical group structure associated with it, defined by \(gN \bullet hN = (gh)N\) and \((gN)^{-1} \coloneqq (g^{-1})N\). Groups of this form are called *quotient groups*.
+#+end_definition
+
+This group structure is well defined for normal subgroups, but not always for arbitrary subgroups. To show that it is well defined, suppose \(g_{1}N = g_{2}N\) and \(h_{1}N = h_{2}N\). We need to show that \(g_{1}h_{1}N = h_{1}h_{2}N\). This follows by normality of \(N\):
+
+\[g_{1}h_{1} N = g_{1} h_{2}N =g_{1}Nh_{2} = g_{2}Nh_{2} = g_{2}h_{2}N.\]
+
+Inverses is well defined, also by normality, for if \(g_{1}N = g_{2}N\), then we have the following equations:
+
+\[(g_{1}N)^{-1}g^{-1}_{2} = g_{1}^{-1}Ng^{-1}_{2} = g_{1}^{-1}g_{2}N = g^{-1}_{1}g_{1}N = N.\]
+
+Hence, \((g^{-1}_{1}N) = (g_{1}N)^{-1} = Ng_{2} = (g^{-1}_{2}N)\), as required.
+
+#+begin_theorem
+Let \(G\) be a group and \(N \leq G\) a subgroup. Then, \(N \triangleleft G\) if and only if \(N\) is the kernel of some group homomorphism from \(G \to H\).
+#+end_theorem
+
+#+begin_proof
+Suppose that \(N \triangleleft G\). Then, there is a canonical function \(\phi: G \to G/N\) mapping \(g \mapsto gN\). This function is a group homomorphism, as
+
+\[\phi(gh) = ghN = gN \bullet hN = \phi(g) \bullet \phi(h).\]
+
+It is clear that the kernel of this morphism is \(N\).
+
+Now, supposing that \(N = \ker(\phi)\), for some \(\phi : G \to K\), Lemma~\ref{lem:group-theory:kernels-are-subgroups} shows that \(N \leq G\). If \(g \in G\) and \(h \in N\), then
+
+\[\phi(g^{-1}h g) = \phi(g^{-1}) \phi(h) \phi(g) = \phi(g^{-1})\phi(g) = e,\]
+
+and so \(g^{-1}h g \in N\), which proves that \(N \triangleleft G\) by Lemma~\ref{lem:group-theory:normal-subgroup-criterion}.
+#+end_proof
+
+** First Isomorphism Theorem for groups
+:PROPERTIES:
+:ID:       ac04ff5f-0224-48a5-bbf8-661fdef29df0
+:END:
+
+Quotient groups have the a universal property.
+
+#+name: thm:group-theory:universal-property-of-quotient-groups
+#+begin_theorem
+Let \(N \triangleleft G\) be a normal subgroup, and \(f : G \to H\) be a group homomorphism with \(N \subset \ker(f)\). Then there is a unique group homomorphism \(\hat f : G/N \to H\) that makes the following diagram commute:
+
+\[\begin{tikzcd}
+G \arrow[r, "\phi"] \arrow[rd, "f"'] & G/N \arrow[d, "\hat f", dashed] \\
+  & H
+\end{tikzcd}\]
+#+end_theorem
+
+#+begin_proof
+The map \(\hat f: G/N \to H\) is defined by \(gN \mapsto f(g)N\). It is a well defined function as if \(g_{1}N = g_{2}N\), \(g_{1}g^{-1}_{2} \in N \subset \ker(f)\), and so \(f(g_{1})=f(g_{2})\) giving the desired result that \(f(g_{1})N = f(g_{2})N\). It is a group homomorphism as \(f\) is a group homomorphism. If there was another map \(k:G/N \to H\) that made this diagram commute, then \(k(gN) = (k \circ \phi)(g) = f(g)\), and so \(k(gN) = f(g) = \bar f (gN)\), proving that \(k = \bar f\).
+#+end_proof
+
+#+begin_blue-box
+  This universal property can be seen categorically as saying the map \(\phi\) is a coequaliser in the category of groups of the diagram:
+
+  \[\begin{tikzcd}
+      N \arrow[r, "i", hook, shift left] \arrow[r, "0"', shift right] & G.
+    \end{tikzcd}\]
+#+end_blue-box
+
+This result essentially gives us the First Isomorphism Theorem for groups.
+
+#+name: thm:group-theory:first-isomorphism-theorem
+#+begin_theorem [First Isomorphism Theorem]
+Let \(\theta : G \to H\) be a group homomorphism. Then, \(N \coloneqq \ker\phi\) is a normal subgroup of \(G\), \(\Im \theta\) is a subgroup of \(H\) and there is an isomorphism
+
+\[\bar \theta : G / N \to \Im \theta.\]
+
+In particular, if \(\theta\) is surjective, then \(G / \ker(\theta) \iso H\).
+#+end_theorem
+
+#+begin_proof
+The map \(\bar \theta\) is given by Theorem~\ref{thm:group-theory:universal-property-of-quotient-groups}. It is clear that the image of \(\bar\theta\) is \(\Im \theta\), since \(\theta(g) = \bar \theta(gN)\), and if \(\bar\theta\) is surjective, it witnesses an isomorphism \(G/\ker(\theta) \iso \Im \theta\).
+#+end_proof
+
+#+begin_ex
+There is a surjective group homomorphism \(\exp : (\C, +) \to (\C^{*}, \times)\). The kernel of \(\exp\) is the set \(N = \{2k\pi i \mid k \in \Z\}\), so \(\C^{*} \iso \C/N\).
+#+end_ex
+
+
+** The Second and Third Isomorphism Theorems and the Correspondence Theorem for groups
+:PROPERTIES:
+:ID:       274095ef-fb36-4713-9000-ac993626398b
+:END:
+
+The second and third isomorphism theorems gives us information about relating the subgroups structure of \(G /N\) to the subgroup structure of \(G\).
+
+#+name: prp:group-theory:preimage-of-subgroups-of-G/N
+#+begin_proposition
+Let \(G\) be a group and let \(N \triangleleft G\). Let \(\theta: G \to G/N\) be the canonical morphism from Theorem~\ref{thm:group-theory:universal-property-of-quotient-groups}, and let \(K \leq G / N\).
+
+1. \(\theta^{-1}(K) \leq G\), with \(N \subset \theta^{-1}(K)\).
+2. \(\theta^{-1}(K) \triangleleft G\) if and only if \(K \triangleleft G/N\).
+#+end_proposition
+
+#+begin_proof
+1. It's clear that the preimage is a subset of \(G\) that contains \(e\). Let \(g, h \in \theta^{-1}(K)\). We see that \(\theta(gh^{-1}) = \theta(g)\theta(h)^{-1}\), which is in \(K\) since it is a subgroup. Hence by Lemma~\ref{lem:group-theory:subgroup-criterion}, it is a subgroup of \(G\).
+
+2. Supposing that \(\theta^{-1}(K) \triangleleft G\) and let \(gN \in G/N\) and \(kN \in K\). We see that \(k \in \theta^{-1}(K)\), and as the preimage is normal in \(G\), \(g^{-1}kg \in \theta^{-1}K\). Therefore, \(g^{-1}kgN = (g^{-1}N)*(kN)*(gN) \in K\), and so \(K \triangleleft G/N\).
+
+Now, assume that \(K \triangleleft G/N\) and let \(g \in G\), \(h \in \theta^{-1}(K)\). \(g^{-1}hgN = (g^{-1}N)*(hN)*(gN) \in K\) by normality of \(K\) and \(hN \in K\). Therefore, \(\theta^{-1}(K) \triangle G\), as required. This completes the proof.
+#+end_proof
+
+#+name: prp:group-theory:normal-subgroups-pullback
+#+begin_proposition
+Let \(N \triangleleft G\) and \(\theta : G \to G/N\) as above. If \(N \leq H \leq G\), then \(H = \theta^{-1}\theta(H)\). That is, all subgroups of \(G\) that contain \(N\) are pulled back from subgroups of \(G/N\).
+#+end_proposition
+
+#+begin_proof
+  It is clear that, \(H \subset \theta^{-1}\theta (H)\).
+  %
+  If \(g \in \theta^{-1}\theta(H)\), then \(\theta(g) \in \theta(H)\) and there must exists \(h \in H\) such that \(\theta(g) = \theta(h)\).
+  %
+  This means that \(\theta(g h^{-1}) = e_{G/N}\) and so \(g h^{-1} \in N \subset H\).
+  %
+  Therefore, \(g = h(h^{-1}g) \in H\) and so \(H = \theta^{-1}\theta(H)\), as required.
+#+end_proof
+
+These two propositions allow us to prove the following:
+
+#+name: thm:group-theory:the-correspondence-theorem
+#+begin_theorem [Correspondence Theorem]
+Let \(G\) be a group with \(N \triangleleft G\) and \(\theta: G \to G/N\) the canonical morphism. The map \(H \mapsto \theta(H)\) is a bijection between subgroups of \(G\) containing \(N\) and subgroups of \(G/N\). Under this bijection, normal subgroups match with normal subgroups; further, if \(N \subset A,B\) are subgroups of \(G\), then \(\theta(A) \subset \theta(B)\) if and only if \(A \subseteq B\).
+#+end_theorem
+
+#+begin_proof
+  Injectivity of the function follows immediately from Proposition~\ref{prp:group-theory:normal-subgroups-pullback}.
+  %
+  Part 1 of Proposition~\ref{prp:group-theory:preimage-of-subgroups-of-G/N} shows that the function is surjective (since \(\theta\theta^{-1}K = K\) and \(N \subset \theta^{-1}(K)\)).
+  %
+  Part 2 of Proposition~\ref{prp:group-theory:normal-subgroups-pullback} shows us that normal subgroups match up with normal subgroups.
+  %
+  Now, supposing that \(N \leq A \leq B \leq G\), it is clear that \(A/N \subset B/N\).
+  %
+  Suppose that \(A/N \subset B/N\) and let \(a \in A\).
+  %
+  There must be \(b \in B\) such that \(aN = bN\), and so \(ab^{-1} \in N\).
+  %
+  This means \(a = bn \in B\), for some \(n \in N\).
+  %
+  Hence, \(a \in B\) and \(A \subseteq B\).
+#+end_proof
+
+#+begin_lemma \label{lem:group-theory:index-of-quotients}
+  Let \(G\) be a group, \(N, H\) subgroups of \(G\) with \(N \triangleleft G\) and \(N \leq H \leq G\). Then \([G : H] = [G/N : \theta(H)]\).
+#+end_lemma
+
+#+begin_proof
+  The index \([G : H] = |G| / |H|\), and \([G/N : \theta(H)] = |G/N| / |\theta(H)| = |G| / (|\theta(H)| \cdot |N|)\). We need to show that \([H : N] = \theta(H)\), as \(|H| = [H : N] \cdot |N|\). But, \(\theta(H)\) is \(\{hN \mid h \in H\}\) which is exactly the set of cosets of \(N\) in \(H\) and so has size \([H:N]\).
+#+end_proof
+
+#+begin_ex
+  Since \(\Z\) is abelian, all of its subgroups are normal.
+  %
+  We can determine all of the subgroups of \(\Z/12Z\) by finding all of the subgroups of \(\Z\) that contain \(12\Z\).
+  %
+  These are \(\Z, 2\Z, 3\Z\) and \(4\Z\).
+  %
+  Under the correspondence, they give the subgroups \(12\Z\), \(2\Z / 12\Z\), \(3\Z / 12\Z\) and \(4\Z / 12\Z\).
+  %
+  There is a surjective group homomorphism \(2\Z / 12\Z \to \Z/6\Z\) mapping \(2n(12\Z) \mapsto n(6Z)\).
+  %
+  It is well defined as if \(2m(12\Z) = 2n(12\Z)\) then \(m(6\Z) = n(6\Z)\) and it is easy to show that it is a group homomorphism.
+  %
+  Theorem~\ref{thm:group-theory:first-isomorphism-theorem} gives us that \((2\Z) / (12\Z) \iso \Z/6\Z\), and likewise, \((m\Z) / (n\Z) \iso \Z/(\frac n m)\Z\).
+#+end_ex
+
+The Third Isomorphism Theorem tells us how to work with groups of the form \((G/N)/(H/N)\).
+
+#+begin_theorem [The Third Isomorphism Theorem]
+  \label{thm:group-theory:the-third-isomorphism-theorem}
+  If \(N \leq H \leq G\), with \(N, H \triangleleft G\), then
+  \[(G/N)/(H/N) \iso G/H.\]
+#+end_theorem
+
+#+begin_proof
+  We have the following diagram:
+    \[\begin{tikzcd}
+      G \arrow[r, "\can_N"] \arrow[rd, "\can_H"'] & G/N \arrow[d, "\pi", dashed] \\
+      & G/H
+    \end{tikzcd}\]
+
+  Since \(N \subset H\), \(N \leq \ker(\can_{H})\) and Theorem~\ref{thm:group-theory:universal-property-of-quotient-groups} gives us the existence of \(\pi\).
+  %
+  Since \(\can_{H}\) is surjective, \(\pi\) is also surjective.
+  %
+  We now show that \(\ker(\pi) = H/N\), and use Theorem~\ref{thm:group-theory:universal-property-of-quotient-groups} to deduce the result.
+  %
+  Let \(hN \in H/N\).
+  %
+  Then, \(\pi(hN) = \can_{H}(h) = e\), so \(hN \in \ker(\pi)\).
+  %
+  Let \(gN \in \ker(\pi)\).
+  %
+  Then, \(e = \pi(gN) = \can_{H}(g)\), so \(g \in H\) which means that \(gN \in H/N\).
+  %
+  This shows that \(H/N = \ker(\pi)\) and so \((G/N) / (H/N) \iso G/H\).
+#+end_proof
+
+What can we say about subgroups of \(H \leq G\) that don't contain the normal subgroup \(N\)?
+
+#+name: thm:group-theory:second-isomorphism-theorem
+#+begin_theorem [The Second Isomorphism Theorem]
+Let \(N \triangleleft G\) be a normal subgroup of a group \(G\) and  \(H \leq G\) a subgroup of \(G\). Then, the following hold:
+1. \(HN \coloneqq \{hn \mid h \in H, n \in N\}\) is a subgroup of \(G\);
+2. \(N \triangleleft HN\);
+3. \(H \cap N \triangleleft H\);
+4. There exists an isomorphism \(HN/N \iso H/(H\cap N)\).
+#+end_theorem
+
+#+begin_proof
+1. It is clear that \(e \in HN\). Let \(h_{1}, h_{2} \in H\) and \(n_{1}, n_{2} \in N\). Then, \(h_{1}n_{1}(h_{2}n_{2})^{-1} = h_{1}n_{1}n_{2}^{-1}h_{2}^{-1}\). Since, \(N \triangleleft G\), \(n_{1}n_{2}^{-1}h_{2}^{-1} \in Nh_{2}^{-1} = h_{2}^{-1}N\), \(n_{1}n_{2}^{-1}h_{2}^{-1} = h_{2}^{-1}n_{3}\), for some \(n_{3} \in N\), we can deduce the following:
+
+    \[(h_{1}n_{1})(h_{2}n_{2})^{-1} = h_{1}n_{1}h_{2}^{-1}h_{2}^{-1} = h_{1}h_{2}^{-1}n_{3} \in HN,\]
+
+and so \(HN \leq G\).
+
+2. \(N\) is normal in \(HN\) since all elements of \(HN\) are also elements of \(G\).
+
+3. Let \(a \in H \cap N\). Then, for all \(h \in H\), \(hah^{-1} \in H\). Since \(N \triangleleft G\) and \(H \subset G\), \(hah^{-1} \in N\), and so \(hah^{-1} \in H \cap N\), which proves \(H\cap N \triangleleft H\).
+
+4. By the Correspondence Theorem (Theorem~\ref{thm:group-theory:the-correspondence-theorem}) and \(N \subset HN\), we have a group homomorphism \(\can_{N}|_{H}: H \to H/N\). The kernel of this map is the set \(\{n \in H \mid n \in N\} = N \cap H\), and the image is \(HN/N\) (follows from \(hN = heN \in HN/N\) and \(hnN = hN\)). Hence, the First Isomorphism Theorem (Theorem~\ref{thm:group-theory:first-isomorphism-theorem}) gives an isomorphism
+
+\[H/(H\cap N) \iso HN/N.\]
+#+end_proof
+
+#+begin_corollary
+Let \(a,b \in \Z\). Then, \(ab = \gcd(a,b)\lcm(a,b)\).
+#+end_corollary
+
+#+begin_proof
+We take the function \(\can_{b}|_{a\Z} : a\Z \to Z / b\Z\). The first isomorphism theorem gives
+
+  \[\can_{b}|_{a\Z}(a\Z) \iso a\Z / (a\Z \cap b\Z) \iso a\Z / \lcm(a,b)\Z.\]
+
+Applying the Second Isomorphism Theorem (Theorem~\ref{thm:group-theory:second-isomorphism-theorem}) to the middle term in the isomorphism chain, we get that
+
+  \[a\Z / a\Z \cap b\Z \iso a\Z b\Z / a\Z \iso (a\Z + b\Z)\Z / b\Z \iso \gcd(a,b) \Z / b\Z.\]
+
+  This gives an isomorphism
+
+  \[a\Z/ \lcm(a,b)\Z \iso \gcd(a,b)\Z/ b\Z.\]
+
+  The left hand side has cardinality \(\lcm(a,b)/a\), while the right hand side's cardinality is \(b/\gcd(a,b)\). This means \(ab = \gcd(a,b)\lcm(a,b)\), as required.
+#+end_proof
+
+
+* Group presentations
+:PROPERTIES:
+:ID:       ce8f018b-8628-4976-a3ec-5246aae8d00e
+:END:
+
+Every group has a /presentation/ which describes it wholly. It is formed by taking a free group and quotienting selected elements to the identity.
+
+#+begin_definition \label{def:group-theory:free-group}
+The *free group* on generators \(x_{1}, x_{2}, \ldots, x_{n}\) is the group whose elements are words in the symbols \(x_{1}, \ldots, x_{m},x^{-1}, \ldots, x^{-1}_{m}\), subject to the group axioms and all logical consequences. The group operation is concatenation. It is written as \(\langle x_{1}, \ldots, x_{m} \rangle\).
+#+end_definition
+
+#+begin_definition \label{def:group-theory:generated-by-subject-to-relations}
+Let \(r_{1}, \ldots, r_{n} \in \langle x_{1}, \ldots, x_{2} \rangle\). The group *generated* by \(x_{1}, \ldots, x_{m}\) subject to the relations \(r_{1}, \ldots, r_{n}\) is the group with generators \(x_{1}, \ldots, x_{m}\), subject to the group axioms, the rules \(r_{1} = r_{2}= \ldots = r_{n} = e\) and all logical consequences. We write this group \(\langle x_{1}, \ldots, x_{m} \mid r_{1}, \ldots, r_{n} \rangle\) and call this a presentation of the group.
+#+end_definition
+
+#+begin_ex
+Let \(D = \langle x \mid x^{3} = x^{2} \rangle\). This group must then satisfy \(x=e\) and so this is a presentation the free group.
+#+end_ex
+
+#+begin_theorem \label{thm:group-theory:universal-property-of-free-groups}
+Let \(G\) be a group and \(S\) an arbitrary set. There is a bijection between the sets of group homomorphisms \(\langle S \rangle \to G\) and functions \(G \to S\).
+#+end_theorem
+
+
+* Sylow theory
+:PROPERTIES:
+:ID:       98b83867-cff4-4c5c-9dd7-65548a129829
+:END:
+
+The Sylow Theorems act as a close converse to Lagrange's theorem. The converse to Lagrange's theorem does not hold in general.
+
+#+begin_ex
+  The alternating group \(A_{4}\) has order \(12\), but has no subgroup of order 6.
+#+end_ex
+
+The best "partial" converse is we have is Cauchy's Theorem:
+
+#+begin_theorem \label{thm:group-theory:cauchys-theorem}
+*Cauchy's Theorem*: If \(p\) is a prime that divides the order of \(G\), then \(G\) has a subgroup of order \(p\).
+#+end_theorem
+
+We need to introduce some tools before we can prove this result.
+
+** Group actions
+:PROPERTIES:
+:ID:       b7f6aeeb-55c6-4b30-856a-8f1342dc5b3a
+:END:
+
+#+begin_definition \label{def:group-theory:group-action}
+Let \(G\) be a group and \(X\) a set. A (left) \indx{\(G\)-action} (or \indx{\(G\)-set}) on \(X\) is a function
+
+  \[\_ \cdot \_ :  G \times X \to X,\]
+
+such that the following hold:
+
+1. The identity acts trivially: \(e \cdot x = x\), for all \(x \in X\);
+2. Actions are associative: \(g \cdot (h \cdot x) = (gh \cdot x)\).
+
+A morphism between two group actions on sets \(X\) and \(Y\) is a function \(f: X \to Y\) such that \(f(g\cdot x) = g \cdot (f(x))\).
+#+end_definition
+
+#+begin_blue-box
+A left group action is equivalently a functor \(G \to \Set\). The functor category \([G, \Set]\) is isomorphic to the category of \(G\)-sets.
+#+end_blue-box
+
+Any \(G\)-set gives rise to two important constructions.
+
+#+begin_definition \label{def:group-theory:orbit}
+The *orbit* of a group action is a subset of \(X\) defined as:
+
+  \[G \cdot x \coloneqq \{g \cdot x \mid g \in G\}.\]
+#+end_definition
+
+#+begin_definition \label{def:group-theory:stabilizer}
+  The *stabilizer* of \(x \in X\) under a group action is the subgroup of \(G\)
+
+  \[\text{Stab}_{G}(x) \coloneqq \{ g \in G \mid g \cdot x = x \}.\]
+ 
+#+end_definition
+
+#+begin_lemma \label{lem:group-theory:stabilizer-is-subgroup}
+Let \(G\) be a group that acts on a set \(X\). Then, for all \(x \in X\), the stabilizer of the group action is a subgroup of \(G\).
+#+end_lemma
+
+#+begin_proof
+  Clearly \(e \in \text{Stab}_{G}(x)\). If \(g, h \in \text{Stab}_{G}(x)\), then
+ 
+  \[\begin{align*}
+    gh^{-1} \cdot x = gh^{-1} \cdot (h \cdot x) = g \cdot x = x.
+  \end{align*}\]
+
+  Therefore, \(gh^{-1} \in \text{Stab}_{G}(x)\) and it is a subgroup of \(G\).
+#+end_proof
+
+#+begin_ex
+Let \(k\) be a field and let \(n\) be a positive integer. Defining \(G = \GL_{n}(k)\) and \(X = k^{n}\), \(G\) acts on \(X\) by matrix multiplication.
+#+end_ex
+
+#+begin_ex
+  Let \(n\) be a positive integer and let \(G = \mathbb S_{n}\), the \(n\)th symmetric group. Let \(X = \{1, \ldots, n\}\). Then \(G\) acts on \(X\) by \(\sigma \cdot i = \sigma(i)\).
+#+end_ex
+
+
+#+begin_lemma \label{lem:group-theory:orbits-partition}
+Let \(G\) act on \(X\). Then,
+1. The action induces an equivalence relation \(\sim\) on \(X\) defined by: \(x \sim y\) if and only if there exists \(g \in G\) with \(g \cdot x = y\);
+2. The equivalence classes of this relation are the orbits.
+3. The distinct orbits in \(X\) form a partition of \(X\).
+#+end_lemma
+
+#+begin_proof
+  It is routine to check that that \(\sim\) is an equivalence relation and that the orbits are the equivalence classes.
+#+end_proof
+
+The fundamental theorem about group actions is the following:
+
+#+begin_theorem \label{thm:group-theory:orbit-stabilizer}
+*Orbit-Stabilizer Theorem*: Let \(G\) be a finite group acting on a set \(X\) and let \(x \in X\). Then
+
+\[|G| = |\text{Stab}_{G}(x)| |G \cdot x|.\]
+#+end_theorem
+
+#+begin_proof
+  This follows from~\nameref{thm:group-theory:Lagranges-theorem}. By Lemma~\ref{lem:group-theory:stabilizer-is-subgroup}, we just need to show that each of the stabilizer's cosets correspond to a unique element of \(G \cdot x\), and visa versa. The maps we construct are \(g \cdot x \mapsto g\text{Stab}_{G}(x)\) and \(g\text{Stab}_{G}(x) \mapsto g\cdot x\). These maps are well defined and inverse to each other, so there is a bijection between the cosets of the stabilizer and \(G \cdot x\). Hence, \(|G| = |\text{Stab}_{G}(x)| |G \cdot x|\).
+#+end_proof
+
+We have enough to prove~\nameref{thm:group-theory:cauchys-theorem}.
+
+# TODO Add cyclic group example, with proof that it has no non-trivial subgroups.
+#+begin_proof
+*Cauchy's Theorem.*
+  Let \(G\) be a group with order \(n\), and let \(p\) be a prime number that divides \(n\). Our goal is to show that \(G\) contains an element of order \(p\), which generates a subgroup of order \(p\) in \(G\). Define the set \(X \coloneqq \{(g_{0}, \ldots, g_{n-1}) \mid \prod_{i=0}^{n-1}g_{i} = e\}\). The cyclic group of order \(p\), \(C_{p}\), acts on this group by \(m \cdot (g_{i}) \coloneqq (g_{i + m \mod n})\). Our goal is to show that there must exist a non-identity element which is fixed by this group action.
+
+  By a simple counting argument, we see that \(|X| = |G|^{p-1}\), which is a multiple of \(p\). By Lemma~\ref{lem:group-theory:orbits-partition}, the orbits must partition \(X\), and by The~\nameref{thm:group-theory:orbit-stabilizer}, each orbit must have size \(1\) or \(p\). Choosing a representative for each orbit \(x_{0}, \ldots x_{m-1}\), we have that
+  \[|X| = pk = \sum_{i=0}^{m-1} C_{p} \cdot x_{i}.\]
+  One of these orbits is a singleton containing the element \((e, \ldots, e)\), so we can write
+
+  \[pk = 1 + \sum_{x_{i} \neq e} C_{p} \cdot x_{i}.\]
+
+  Since the left hand side is a multiple of \(p\), the right hand side must be also. As \(1\) is not a multiple of \(p\), there must exist \(p-1\) representatives that have orbits of size \(1\). Denote one such element by \(\overline x\). We must also have that \(|\text{Stab}_{C_{p}}(\overline x)| = p\), and so \(\overline x = (g \ldots, g)\) for some non-identity element \(g \in G\). Therefore, \(\prod_{i=0}^{p-1}g = e\), and so \(o(g) \leq p\). If the order of \(g\) was less than \(p\), then \(p\) would need to be a multiple of the order. As \(p\) is prime, this is not the case, and so \(o(g) = p\).
+#+end_proof
+
+#+begin_ex
+  Any group \(G\) can act on its underlying set in two different ways. The first is by multiplication, with \(g \dot h \coloneqq gh\), and the second is by conjugation: \(g \cdot h \coloneqq ghg^{-1}\).
+#+end_ex
+
+#+begin_definition \label{def:group-theory:centralizer}
+  Let \(G\) be a group and let \(a \in G\). The *centralizer* \(C_{G}(a)\) is the Stabilizer \(\text{Stab}_{}(a)\) where \(G\) acts on itself by conjugation. It is precisely the set of elements in \(G\) that commute with \(a\): \(\{g \in G \mid ga = ag\}\).
+#+end_definition
+
+#+begin_definition \label{def:group-theory:conjugacy-class}
+Let \(G\) be a group and let \(a \in G\). The *conjugacy class of \(a\)* is the orbit of \(a\) where \(G\) acts on itself by conjugation. We denote it by \(\Cl(a) \coloneqq \{gag^{-1} \mid g \in G\}\).
+#+end_definition
+
+#+begin_corollary \label{cor:group-theory:centralizer-conjugacy-classes-divide-G}
+  Let \(G\) be a finite group. For any \(a \in G\), we have
+
+  \[|G| = |C_{G}(a)| |\Cl(a)|,\]
+
+  and this both \(|C_{G}(a)|\) and \(|\Cl(a)|\) divide \(|G|\).
+#+end_corollary
+
+#+begin_proof
+  Immediate from the \nameref{thm:group-theory:orbit-stabilizer}.
+#+end_proof
+
+#+begin_corollary [Class Equation]\label{cor:group-theory:class-equation}
+  Let \(G\) be a finite group. Then, there exists elements \(a_{1}, \ldots, a_{n} \in G\) such that
+  \[|G| = \sum_{i=1}^{n} |\Cl(a_{i})|.\]
+#+end_corollary
+
+#+begin_proof
+  By Lemma~\ref{lem:group-theory:orbits-partition}, the orbits of the conjugacy group action partition \(G\). These orbits are the conjugacy classes, hence we get the above equation.
+#+end_proof
+
+
+#+begin_definition
+  Let \(p\) be a prime number. A *\(p\)-group* is a group \(G\) such that each element has order a power of \(p\).
+#+end_definition
+
+#+begin_lemma \label{lem:group-theory:p-group-has-order-p^n}
+  If \(|G|\) is finite, then \(G\) is a \(p\)-group if and only if \(|G|\) is a power of \(p\).
+#+end_lemma
+
+#+begin_proof
+  If \(|G|\) is a power of \(p\), by~\nameref{thm:group-theory:Lagranges-theorem}, for all \(g \in G\), \(\langle g \rangle\) has order a power of \(p\) and hence so does \(g\). Suppose for contradiction that \(q\) is a prime not equal to \(p\) that divides \(|G|\). Then~\nameref{thm:group-theory:cauchys-theorem} determines there must be a subgroup of order \(q\), and as \(q\) is prime, \(G\) must have an element of order \(q\), which is a contradiction.
+#+end_proof
+
+
+#+begin_theorem \label{thm:group-theory:p-group-non-trivial-centre}
+  Let \(G\) be a non-trivial finite \(p\)-group. Then the centre \(Z(G) \neq \{e\}\).
+#+end_theorem
+
+#+begin_proof
+  Choose \(a_{1}, \ldots, a_{n} \in G\) such that \(|G| = \sum_{i=1}^{n} |\Cl(a_{i})|\). By Corollary~\ref{cor:group-theory:centralizer-conjugacy-classes-divide-G}, each term in the sum divides \(|G|\), and so for each \(a_{i}\), there exists \(r_{i}\) such that \(|\Cl(a_{i})| = p^{r_{i}}\).
+
+  Noticing that \(a \in Z(G)\) if and only if \(\Cl(a) = {a}\), we can split the sum from the class equation up as follows:
+  \[ p^{n} = |G| = \sum_{i=1}^{n} |\Cl(a_{i})| = \sum_{a_{i} \in Z(G)} |\Cl(a_{i})|+ \sum_{a_i \not\in Z(G)} |\Cl(a_{i})|= |Z(G)| + \sum_{a_i \not\in Z(G)}|\Cl(a_{i})|.\]
+
+  As \(|\Cl(a)| = 1\) if and only if \(a \in Z(G)\), each \(\Cl(a_{i})|\) must be a power of \(p\). Since \(p | p^{k}\), we must have \(p | |Z(G)|\) and so \(Z(G)\) is non-trivial.
+#+end_proof
+
+#+begin_lemma \label{lem:group-theory:cyclic-centre-implies-abelian}
+  If \(G\) is a group with \(G / Z(G)\) cyclic, then \(G\) is abelian.
+#+end_lemma
+
+#+begin_proof
+  As \(G / Z(G)\) is cyclic, there is some \(h \in G\) such that \(hZ(G)\) generates \(G / Z(G)\). Then, since the cosets partition \(G\), every element \(g \in G\) is equal to \(h^{n}k\), for some \(k \in Z(G)\). The product \(gg'\) is then equal to \(h^{n}kh^{m}k'\) for some \(k, k' \in Z(G)\). Each term in this product commutes with the other terms, since we can swap powers of \(h\) and the centre of a group is exactly the elements that commute with every other element. Hence, \(gg' = h^{n}kh^{m}k' = h^{m}k'h^{n}k = g'g\), and \(G\) is abelian.
+#+end_proof
+
+#+begin_corollary
+  If \(G\) is a group with \(|G| = p^{2}\), then \(G\) is abelian.
+#+end_corollary
+
+#+begin_proof
+  By Theorem~\ref{thm:group-theory:p-group-non-trivial-centre}, \(G\) has a non-trivial centre, and so \(|Z(G)|\) is equal to \(p\) or \(p^{2}\). If it equals \(p^{2}\), then \(G\) is abelian, so assume the order of the centre is \(p\). Since \(Z(G)\) is normal in \(G\), we can quotient by it and get that \(G/Z(G)\) has order \(p\) and is therefore cyclic. By Lemma~\ref{lem:group-theory:cyclic-centre-implies-abelian}, \(G\) must be abelian.
+#+end_proof
+
+*** Polya counting
+:PROPERTIES:
+:ID:       910a530c-686a-4147-92ec-7a2a6c644476
+:END:
+
+Before moving on to Sylow theory, it is worth looking at a beautiful application of group theory.
+
+#+begin_theorem [P\'olya Enumeration Theorem] \label{thm:group-theory:polya-enumeration-theorem}
+  Let \(G\) be a finite group acting on a finite set \(X\). For \(g \in G\), define \(\operatorname{Fix}(g) \coloneqq \{ x \in X \mid g \cdot x = x \}\). Then, the number of orbit classes in \(X\) is equal to \(\frac{1}{|G|} \sum_{g \in G} |\operatorname{Fix}(g)|\).
+#+end_theorem
+
+#+begin_proof
+  Let \(Z \coloneqq \{(g, x) \mid g \cdot x = x\}\). We see that for each \(g \in G\), there are \(|\operatorname{Fix}(g)|\) possible \(x\), and so \(|Z| = \sum_{g \in G} |\operatorname{Fix}(G)|\). Also, for each \(x \in G\), there are \(|\text{Stab}_{G}(x)|\) possible \(g \in G\) such that \(g \cdot x = x\), so \(|Z| = \sum_{x \in X} |\text{Stab}_{G}(x)|\). By the \nameref{thm:group-theory:orbit-stabilizer} theorem, \(|\text{Stab}_{G}(x)| = \frac{|G|}{|\Orb(x)|}\), and so \(\frac{1}{|G|} \sum_{g \in G} | \operatorname{Fix}(g)| = \sum_{x \in X} \frac{1}{|\Orb_{G}(x)|}\). But the right hand side of this is exactly equal to the number of orbits classes of the group action.
+#+end_proof
+
+#+begin_ex
+  How many essentially different ways are there of colouring the vertices of a regular 7-gon, with three colours? By ``essentially different'', we mean we quotient out by orbits of the canonical action of \(D_{7}\). Our goal then, is to count the number of orbits of \(D_{7}\) acting on the set of all possible colourings of the 7-gon. There are \(3^{7} = 2187\) total possible colourings.
+
+- The identity element fixes all coloured 7-gons, so \(|\operatorname{Fix}(e)| = 2187\);
+- Any of the 6 non-trivial rotations only fix a 7-gon if every node has the same colour as every other node, of which there are three such 7-gons.
+- Any of the reflections (of which there are 7) only fix a 7-gon if each node's opposite in the line of symmetry is the same colour as itself (with one elment being its own opposite). This means that each reflection fixes exactly \(3^{4} = 81\) 7-gons.
+
+The total then, by the \nameref{thm:group-theory:polya-enumeration-theorem} is
+
+  \[\frac{2187 + 6 \times 3 + 7 \times 81}{14} = 198.\]
+#+end_ex
+
+** The Sylow Theorems
+:PROPERTIES:
+:ID:       5a0dc4c5-2533-43b1-8e41-a99219822a98
+:END:
+
+#+begin_definition \label{def:group-theory:sylow-subgroup}
+  Let \(G\) be a finite group and let \(p\) be a prime number. A subgroup \(H \leq G\) is a *\(p\)-subgroup* of \(G\) if it is a \(p\)-group. We say it is a *Sylow \(p\)-subgroup* of \(G\) if its order is the highest power of \(p\) that divides the order of \(G\). We say that \(H\) is a *Sylow subgroup* of \(G\) if its is a Sylow \(p\)-subgroup for some prime \(p\).
+#+end_definition
+
+If \(p\) does not divide \(|G|\), then the trivial subgroup is the unique Sylow \(p\)-subgroup of \(G\). When we want to exclude this case, we refer to \indx{non-trivial Sylow \(p\)-subgroups}.
+
+#+begin_definition
+For any group \(G\), let \(n_{p}\) be the number of distinct Sylow \(p\)-subgroups of \(G\).
+#+end_definition
+
+It's not obvious that non-trivial Sylow \(p\)-subgroups always exist. The first Sylow Theorem guarantees that they do. The second Sylow Theorem says that for a given \(p\) all Sylow \(p\)-subgroups of \(G\) are conjugate, and the third gives information about the number of Sylow \(p\)-subgroups of \(G\).
+
+#+begin_theorem [Sylow 1]\label{thm:group-theory:Sylow-1}
+*Sylow1*:  Let \(|G| = n\) and \(p\) be a prime that divides \(n\). Write \(n = p^{m}r\), with \(p \not| r\). Then, there exists a subgroup of order \(p^{m}\); that is, there is exists a Sylow \(p\)-subgroup.
+#+end_theorem
+
+#+begin_proof
+  Define a set \(X \coloneqq \{ A \subset G \mid |A| = p^{m}\}\). This is a set of \textit{subsets} of \(G\). There is a group action we can put on \(X\), namely \(g \cdot A \coloneqq gA\). To prove the First Sylow Theorem, we show that this group action has an orbit whose size is not divisible by \(p\). From this, we can then construct a subgroup of \(G\) with order \(p^{m}\).
+
+  Since \(X\) is formed from all subsets of size \(p^{m}\) from a set of size \(p^{m} r\), \(|X| = {p^{m}r \choose p^{m}}\). We can write
+
+  \[{p^{m}r \choose p^{m}} = \frac{p^{m}r(p^{m}r-1)(p^{m}r -2) \ldots (p^{m}r - (p^{m}-1))}{p^{m}(p^{m} - 1)(p^{m} - 2)\ldots(p^{m} - (p^{m} - 1))}.\]
+
+  Looking at the terms \(p^{m}r - s\) and \(p^{m} - s\) for \(1 \leq s \leq p^{m}-1\), we see that the highest power of \(p\) dividing them both is the same - it is the highest power of \(p\) that divides \(s\). We can then pair up terms on the numerator and denominator that are divisible by the same powers of \(p\). This results in the right hand side of the above equation not being divisible by \(p\), and so \(|X|\) isn't either. As \(X\) is a disjoint union of orbits, there must be at least one orbit whose cardinality isn't divisible by \(p\)\footnote{If this were false, \(|X|\) is equal to the sum of numbers divisible by \(p\) and would be divisible by \(p\) itself.}.
+
+  Choose an orbit whose cardinality is not divisible by \(p\) and call it \(G \cdot A\). The~\nameref{thm:group-theory:orbit-stabilizer} tells us that \(|G \cdot A| = [G : \text{Stab}_{G}(A)]\), which means that \(|\text{Stab}_{G}(A)|\) must be divisible by \(p^{m}\). Since \(\text{Stab}_{G}(A) \cdot (A) = A\), for any \(a \in A\) we have \(\text{Stab}_{G}(A)a \subset A\). This means \(|\text{Stab}_{G}(A)| = |\text{Stab}_{G}(A)a| \leq |A| = p^{m}\). Therefore, \(\text{Stab}_{G}(A)\) is a subgroup \(G\) with size \(p^{m}\).
+#+end_proof
+
+Before proving~\ref{thm:group-theory:Sylow-2}, we prove the following lemma.
+
+#+begin_lemma \label{lem:group-theory:fixed-points-p-group-action}
+  Let \(p\) be a prime and \(G\) a finite \(p\)-group acting on a finite set \(X\). The number of fixed points in \(X\) is congruent to \(|X| \mod p\).
+#+end_lemma
+
+#+begin_proof
+  Let \(x_{1}, \ldots x_{m}\) be representatives for the orbits which partition \(X\). The singleton orbits are exactly the sets containing the fixed points of the group action. Define \(X_{0}\) to be the subset of \(X\) consisting of the fixed points, and remove and re-index our original representatives to be representatives of the remaining orbits: \(x_{1}, \ldots, x_{n} \in X \ X_{0}\). As each \(x_{i}\) is not a fixed point, the stabilizers \(\text{Stab}_{G}(x_{i})\) are proper subgroups of \(G\) and their indices \([G : \text{Stab}_{G}(x_{i})]\) must all be greater than 1, by~\nameref{thm:group-theory:Lagranges-theorem}. Each indice must divide the order of \(G\), and hence be a power of \(p\). The~\ref{thm:group-theory:orbit-stabilizer} then gives that \(p\) divides \(|G \cdot x_{i}|\) for each \(i\). Since
+  \[|X| = |X_{0}| + \sum_{i=1}^{n} |G \cdot x_{i}|,\]
+
+  and each of \(|G \cdot x_{i}|\) are divisible by \(p\), \(|X| = |X_{0}| \mod p\).
+#+end_proof
+
+#+begin_green-box
+The proof of Theorem~\ref{thm:group-theory:p-group-non-trivial-centre} is really just an application of this proof.
+#+end_green-box
+
+We can now prove~\nameref{thm:group-theory:Sylow-2}.
+
+#+begin_theorem [Sylow 2]\label{thm:group-theory:Sylow-2}
+*Sylow 2*: Let \(|G| = n\) and \(p\) be a prime that divides \(n\). Write \(n = p^{m}r\), with \(p \not| r\). Suppose that \(P\) is a Sylow \(p\)-subgroup and \(H \leq G\) is any \(p\)-subgroup of \(G\). Then, there exists \(x \in G\) with \(H \subset xPx^{-1}\). In particular, any two Sylow \(p\)-subgroups of \(G\) are conjugate in \(G\).
+#+end_theorem
+
+#+begin_proof
+  The \(p\)-subgroup \(H\) acts on the group of cosets \(G/P\) by \(h \cdot gP \coloneqq hgP\). Lemma~\ref{lem:group-theory:fixed-points-p-group-action} ensures that the number of fixed points of this action is congruent modulo \(p\) to \(|G/P| = [G : P] = r\), by~\nameref{thm:group-theory:Lagranges-theorem}. Since \(p\) can't divide \([G : P]\) as \(P\) is a Sylow \(p\)-subgroup, there must exist a fixed point, \(xP\). Then, \(hxP = xP\) for all \(h \in H\) and so \(x^{-1}hx \in P\) for all \(h \in H\). Therefore, \(x^{-1}Hx \subset P\), and so \(H \subset xPx^{-1}\).
+
+  Supposing that \(H\) is a Sylow \(p\)-subgroup, \(|H| = |P| = |xPx^{-1}|\). Since \(H \subset xPx^{-1}\), we must have \(H = xPx^{-1}\) and so \(H\) is conjugate to \(P\).
+#+end_proof
+
+A useful lemma this often used in conjunction with the Sylow Theorems is the following, which we can prove now with \nameref{thm:group-theory:Sylow-2}.
+
+#+begin_lemma \label{lem:group-theory:p-group-normal-iff-np=1}
+  Let \(G\) be a finite group and \(p\) a prime number. Then \(G\) has a Sylow \(p\)-subgroup that is normal in \(G\) if and only if \(n_{p} = 1\).
+#+end_lemma
+
+#+begin_proof
+  Let \(P \leq G\) be a Sylow \(p\)-subgroup. By \nameref{thm:group-theory:Sylow-2}, all \(p\)-subgroups are conjugate, so \(n_{p}\) is the number of conjugates of \(P\) and a subgroup is normal if and only if it has a unique conjugate. Hence, \(P\) is normal if and only if \(n_{p} = 1\).
+#+end_proof
+
+The Third Sylow theorem tells us how to count Sylow \(p\)-subgroups. This number is closely related to a new subgroup of \(G\).
+
+#+begin_definition \label{def:group-theory:normalizer}
+Let \(G\) be a group and \(H \leq G\). The *normalizer* of \(H\) is
+
+  \[N_{G}(H) = \{g \in G \mid gHg^{-1} = H\}.\]
+#+end_definition
+
+#+begin_lemma
+  For any \(H \leq G\), \(N_{H}(G)\) is a subgroup of \(G\).
+#+end_lemma
+
+#+begin_proof
+  It is clear that \(e \in N_{G}(H)\). If \(g,h \in N_{H}(G)\), then we have
+  \[gh^{-1}H hg^{-1} = gHg^{-1} = H,\]
+  and so \(N_{H}(G) \leq G\).
+#+end_proof
+
+It is clear that \(H \triangleleft N_{G}(H)\) and that \(N_{G}(H)\) is the largest subgroup \(N\) of \(G\) with \(H \triangleleft N\). The normalizer tells us how close a subgroup \(H\) is to being normal, with \(H \triangleleft G\) if and only if \(N_{G}(H) = G\).
+
+#+begin_lemma
+Let \(G\) be a finite group.
+1. For any subgroup \(H \leq G\), we have
+
+      \[[G:N_{G}(H)] = \text{the number of distinct conjugates of } H.\]
+     
+2. Let \(p \mid |G|\) and let \(P\) be a Sylow \(p\)-subgroup of \(G\). Then \(n_{p} = [G:N_{G}(P)]\).
+
+
+#+end_lemma
+
+#+begin_proof
+1. Let \(X\) be the set of conjugates of \(H\). Then, \(G\) acts on \(X\) by conjugation with \(a \cdot bHb^{-1} = abH(ab)^{-1}\). By The \nameref{thm:group-theory:orbit-stabilizer} Theorem,
+    \[|G| = |\text{Stab}_{G}(H)| |G\cdot H|.\]
+By definition, \(G \cdot H = X\) and \(\text{Stab}_{H}(G) = N_{G}(H)\). This gives
+    \[\text{the number of conjugates of } H = |X| = \frac{|G|}{|N_{G}H|} = [G : N_{G}(H)].\]
+2. This is immediate since the number of conjugates of \(P\) is equal to \(n_{p}\), by the proof of Lemma~\ref{lem:group-theory:p-group-normal-iff-np=1}.
+#+end_proof
+
+We can now prove \nameref{thm:group-theory:Sylow-3}.
+
+#+begin_theorem [Sylow 3]\label{thm:group-theory:Sylow-3}
+*Sylow 3*: Let \(|G| = n\) and \(p\) be a prime that divides \(n\). Write \(n = p^{m}r\), with \(p \not| r\). Then, \(n_{p} | r\) and \(n_{p} = 1 \mod p\).
+#+end_theorem
+
+#+begin_proof
+  As \(n_{p} = [G : N_{G}(P)] = |G|/|N_{G}(P)|\), we have
+  \[r = \frac{|G|}{|P|} = \frac{|G|}{|N_{G}(P)|} \frac{|N_{G}(P)|}{|P|} = n_{p}\frac{|N_{G}(P)|}{|P|},\]
+  and so \(n_{p} | r\).
+
+  Let \(X\) be the set of all Sylow \(p\)-subgroups of \(G\) and choose \(P \in X\). Let the \(p\)-group \(P\) act on \(X\) by conjugation. The number of fixed points for this action is congruent to \(|X| = n_{p} \mod p\), by Lemma~\ref{lem:group-theory:fixed-points-p-group-action}. We prove that \(P\) is the unique fixed point of this action.
+  It is clear that \(P\) is a fixed point, since \(pPp^{-1} = P\) for all \(p \in P\). If \(pQp^{-1} = Q\) for all \(p \in P\), then \(P \subset N_{G}(Q)\), and so \(P\) and \(Q\) are Sylow \(p\)-subgroups of \(N_{G}(Q)\). As \(Q \triangleleft N_{G}(Q)\), \(Q\) is the only Sylow \(p\)-subgroup of \(N_{G}(Q)\) by Lemma~\ref{lem:group-theory:p-group-normal-iff-np=1}. Then, we must have \(P = Q\).
+
+  By Lemma~\ref{lem:group-theory:fixed-points-p-group-action}, \(n_{p} = |X| = 1 \mod p\), as required.
+#+end_proof
+
+
+*** Applications
+The Sylow theorems are very useful when trying to characterise finite groups. This section presents common uses of the theorems.
+
+#+begin_ex
+  Consider \(S_{3}\), whose order is 6. It must have non-trivial Sylow \(p\)-subgroups of order 2 and 3. There are 3 transpositions in \(S_{3}\), giving three Sylow 2-subgroups. Clearly, they are all conjugate.
+  There is a unique subgroup of order 3, which is therefore normal.
+#+end_ex
+
+#+begin_ex
+  Consider \(D_{6}\), the group of symmetries of the hexagon. It has 12 elements, so \nameref{thm:group-theory:Sylow-1} predicts the existence of a subgroup of order 3, and a subgroup of order 4. The subgroup of order 3 is generated by a rotation of \(\pi / 3\) degrees, while the subgroup of order 4 must by isomorphic to \(\mathbb Z^{2} \times \mathbb Z^{2}\). For any reflection \(a\), we have \(ah^{3} = h^{3} a\), giving \(\{e, a, h^{3}, ah^{3}\}\) as a subgroup of order 4. There are three such subgroups of order four, each of them conjugate to the others.
+#+end_ex
+
+#+begin_proposition
+  Any group of order 30 has a nontrivial normal subgroup.
+#+end_proposition
+
+#+begin_proof
+  As \(30 = 2 \times 3 \times 5\), we have \(n_{5} = 1 \mod 5\) and \(n_{p} \mid 6\), which means that there is either \(n_{5} = 1\) or \(n_{5} = 6\). By Lemma~\ref{lem:group-theory:normal-subgroup-criterion}, we can assume that \(n_{5} = 6\). The intersection of any two distinct Sylow 5-subgroups must be trivial, since the intersection of subgroups is a subgroup, and if the intersection contained an element of order 5, the subgroups would not be distinct. This means there are \(6 \times (5-1) = 24\) elements of order 5. Likewise, we have \(n_{3} = 1 \mod 3\) and \(n_{3} \mid 10\) and so either \(n_{3} = 1\) or  \(n_{3} = 10\). Without loss of generality, assuming that \(n_{3} = 10\) gives \(10 \times (3 - 1) = 20\) elements of order 3. This is means that our group of order 30 must have at least 44 elements in, which is plainly false. Therefore, either \(n_{3} = 1\) or \(n_{5} = 1\), giving a non-trivial normal subgroup.
+#+end_proof
+
+#+begin_lemma
+  Let \(p\) be a prime number and let \(\abs{G} = p^{n}\) for \(n > 1\). Then \(G\) must have a non-trivial normal subgroup.
+#+end_lemma
+
+#+begin_proof
+  Supposing that \(G\) is not abelian, Theorem~\ref{thm:group-theory:p-group-non-trivial-centre} tells us that its centre is non-trivial. The centre is always a normal subgroup, so \(G\) has a non-trivial normal subgroup. If \(G\) is abelian, every subgroup is normal, including the subgroups of order \(p\) that must exist by \nameref{thm:group-theory:cauchys-theorem}.
+#+end_proof
+
+#+begin_lemma
+  Let \(G\) be a group with order \(pq\) for two distinct primes \(p, q\). Then, \(G\) must have a non-trivial normal subgroup.
+#+end_lemma
+
+#+begin_proof
+  By \nameref{thm:group-theory:Sylow-3}, \(n_{p} = 1 \mod p\) and \(n_{p} \mid q\). Either \(n_{p} = 1\), or \(n_{p} = q\). If \(n_{p} = 1\), there is a non-trivial normal subgroup by Lemma~\ref{lem:group-theory:p-group-normal-iff-np=1}, so assume that \(n_{p} = q\). This means there are \(q \times (p - 1) = qp - q\) elements of order \(p\). We also have \(n_{q} = 1 \mod q\) and \(n_{q} \mid p\) so assume that \(n_{q} = p\). This gives \(p \times (q -1) = pq - p\) elements of order \(q\). In total we have \(pq-p + pq-q = 2pq - p - q\) elements. This is always greater than \(pq\), either \(n_{p}\) or \(n_{q}\) is 1.
+#+end_proof
+
+#+begin_lemma
+  Let \(G\) be a group with order \(p^{2}q\) for distinct primes \(p\) and \(q\). Then, \(G\) contains a non-trivial normal subgroup.
+#+end_lemma
+
+#+begin_proof
+ \nameref{thm:group-theory:Sylow-3} gives us that \(n_{p} = 1 \mod p\) and \(n_{p} \mid q\). This means that \(n_{p}\) is either 1 or \(q\). Assuming \(n_{p} = q\), there must be \(q \times (p^{2}-1) = qp^{2} - q\) elements of order \(p\) or \(p^{2}\). We also have that \(n_{q} = 1 \mod q\) and \(n_{q} | p^{2}\), giving \(n_{q}\) equal to either 1, \(p\) or \(p^{2}\). If \(n_{q} = p\), there are \(p \times (q -1) = pq - p\) elements of order \(q\). The sum \(p^{2}q + pq -q -p\) is always greater than \(p^{2}q\), so we must have \(n_{q} = p^{2}\), but this only adds more elements of order \(q\). Hence either \(n_{p} =1 \) or \(n_{q} = 1\) and there is a non-trivial normal subgroup.
+#+end_proof
+
+
+
+* Finitely generated abelian groups
+:PROPERTIES:
+:ID:       b193c7f6-776e-48d4-983b-00776e01aa41
+:END:
+
+This section will present results about characterising finitely generated abelian groups. The main results will have their proofs omitted, since they can be proved by more general results about \(R\)-modules.
+
+** Finite abelian groups
+
+#+begin_theorem
+  Suppose that \(A\) is a finite abelian group of order \(n\) and that \(n = p_{1}^{s_{1}}p_{2}^{s_{2}} \ldots p_{t}^{s_{t}}\), for distinct primes \(p_{i}\). Let \(A_{p_{i}}\) be the unique Sylow \(p_{i}\)-subgroup of \(A\). Then
+  \[A \iso A_{p_{1}} \times A_{p_{2}} \times \ldots \times A_{p_{t}}.\]
+  That is, \(A\) is isomorphic to the direct products of its Sylow subgroups.
+#+end_theorem
+
+
+#+begin_theorem
+  Let \(A\) be an abelian group with \(\abs{A} = p^{n}\) for some prime \(p\). Then \(A\) is an internal direct product of cyclic subgroups of orders \(p^{e_{1}}, p^{e_{2}}, \ldots, p^{{e_{s}}}\) where \(e_{1} \geq e_{2} \geq \ldots \geq e_{s} \geq 1\) and \(e_{1} + e_{2} + \ldots + e_{s} = n\).
+#+end_theorem
+
+#+begin_theorem [Fundamental Theorem of Finite Abelian Groups, I]\label{thm:group-theory:fundamental-theorem-of-finite-abelian-groups-I}
+  Let \(A\) be a finite abelian group. Then \(A\) is a direct product of cyclic groups of prime power order.
+#+end_theorem
+
+#+begin_theorem [Chinese Remainder Theorem]
+  Let \(m, n\) be non-zero coprime integers. Then \(C_{mn} \iso C_{m} \times C_{n}\).
+#+end_theorem
+
+#+begin_corollary [Fundamental Theorem of Finite Abelian Groups, II] \label{cor:group-theory:fundamental-theorem-of-finite-abelian-groups-II}
+  Any finite abelian group of order \(n\) can be written as a direct product of cyclic groups
+  \[C_{n_{1}} \times C_{{n_{2}}} \times \ldots \times C_{n_{s}},\]
+  where \(n_{i} \mid n_{i+1}\) for each \(i = 1, 2, \ldots, s-1\) and \(n_{1}n_{2}\ldots n_{s} = n\).
+#+end_corollary
+
+#+begin_definition
+  The \indx{exponent}, \(e(G)\), of a finite group is the least common multiple of the orders of the elements of \(G\).
+#+end_definition
+
+By \nameref{thm:group-theory:Lagranges-theorem}, \(e(G) \leq \abs{G}\).
+
+#+begin_lemma
+  If \(A\) is a finite abelian group, then \(A\) contains an element of order \(e(A)\).
+#+end_lemma
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_corollary
+  If \(A\) is a finite abelian group with \(e(A) = \abs{A}\) then \(A\) is cyclic.
+#+end_corollary
+
+#+begin_theorem
+  Let \(A\) be a finite subgroup of the multiplicative group \(K^{*}\) of a field \(K\). Then \(A\) is a cyclic group.
+#+end_theorem
+
+#+begin_proof
+  The subgroup \(A\) must be abelian. Let \(e = e(A)\) and so for all \(a \in A\), \(a^{e} = 1\), so every element of \(A\) is a solution to the polynomial \(X^{e} - 1 \in K[X]\). However, a polynomial of degree \(e\) has at most \(e\) roots in \(K\) and so \(\abs{A} \leq e\), which implies \(\abs{A} = e\) and so \(A\) is cyclic.
+#+end_proof
+
+#+begin_corollary
+  The multiplicative group of a finite field is cyclic.
+#+end_corollary
+
+* Symmetric and alternating groups
+
+** Symmetric groups
+
+Symmetric groups are the group of permutations on \(n\) objects. There are two different ways to represent permutations. A permutation \(\sigma \in S_{n}\) can be represented as a \(2 \times n\) array:
+\begin{equation}
+  \begin{bmatrix}
+    1 & 2 & \ldots & n \\
+    \sigma(1) & \sigma(2) & \ldots & \sigma(n)
+  \end{bmatrix}
+\end{equation}
+
+The other way is using \emph{cycle notation}, for example \((2,1,4)\), which means the permutation sending \(2 \mapsto 1 \mapsto 4 \mapsto 2\). This is not unique. Cycles can be composed as expected. Two cycles are disjoint if no integer appears in both cycles. Two disjoint cycles commute, but this does not happen for arbitrary cycles.
+
+#+begin_lemma
+  Every permutation can be written as a product of disjoint cycles and the product is unique up to re-ordering the factors.
+#+end_lemma
+#+begin_proof
+  % TODO
+#+end_proof
+
+A 2-cycle is called a transposition.
+
+#+begin_lemma
+  Every permutation can be written as the product of transpositions. This, \(S_{n}\) is generated by transpositions.
+#+end_lemma
+
+
+#+begin_definition
+  Suppose that \(\sigma = c_{1}c_{2} \ldots c_{k}\) is a product of \(k\) disjoint cycles of lengths \(l_{1}, l_{2}, \ldots, l_{k}\), with \(l_{i} \geq l_{i+1}\). Then, the \(k\)-tuple \(l_{1}, l_{2}, \ldots, l_{k}\) is called the \indx{cycle type} of \(\sigma\).
+#+end_definition
+
+#+begin_theorem
+  Two permutations in \(S_{n}\) are conjugate if and only if they have the same cycle type.
+#+end_theorem
+#+begin_proof
+  % TODO
+#+end_proof
+
+** Alternating groups
+We can define a predicate on \(S_{n}\) as follows: let \(x_{1}, \ldots x_{n}\) be indeterminates and set
+\[P \coloneqq \prod_{1 \leq i < j \leq n} (x_{i} - x_{j}).\]
+Set \(X = \{P, -P\}\). The symmetric group \(S_{n}\) acts on \(X\) by permuting the variables.
+
+#+begin_definition
+  If \(\sigma \in S_{n}\) fixes \(P\) then \(\sigma\) is an \indx{even permutation}, while if \(\sigma \cdot P = -P\) then \(\sigma\) is an \indx{odd permutation}. The set of even permutations is denoted \(A_{n}\) and is called the \indx{alternating group}.
+#+end_definition
+
+
+
+#+begin_lemma
+The following hold:
+1. The product of two even permutations is even.
+2. The product of two odd permutations is even.
+3. The product of an even and odd permutation (in either order) is odd.
+4. A cycle length \(n\) is even if \(n\) is odd and is odd if \(n\) is even.
+#+end_lemma
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_theorem
+  Let \(n \geq 2\). Then, \(A_{n} \triangleleft S_{n}\) and hence has index 2. The size of \(A_{n}\) is therefore \(n! / 2\).
+#+end_theorem
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+% TODO more results here
+
+** Simplicity of \(A_{n}\)
+
+#+begin_definition
+  A group \(G\) is \indx{simple} if its only normal subgroups are \(\{e\}\) and \(G\).
+#+end_definition
+
+In this section, we prove that \(A_{n}\) is simple when \(n \geq 5\).
+
+#+begin_theorem \label{thm:group-theory:A5-is-simple}
+  The alternating group \(A_{5}\) is simple.
+#+end_theorem
+
+#+begin_proof
+  We show that there are 5 conjugacy classes in \(A_{5}\), containing 1, 15, 20, 12, 12 elements, respectively. If \(N \triangleleft A_{5}\), then \(|N|\) will be equal to a sum from the previous numbers\footnote{I think this follows from~\nameref{cor:group-theory:class-equation}}. This sum must then divide 60 (by~\nameref{thm:group-theory:Lagranges-theorem}) and the only possibilities for this are \(N = \{()\}\) or \(N = A_{5}\), hence \(A_{5}\) is simple.
+#+end_proof
+
+For proving the result about all \(n \geq 5\), we need a few lemmas.
+
+#+begin_lemma
+  If \(n \geq 5\) and \(\sigma, \sigma'\) are 3-cycles in \(A_{n}\), then \(\sigma\) and \(\sigma'\) are conjugate in \(A_{n}\). That is, there exists \(\tau \in A_{n}\) with \(\tau \sigma \tau^{-1} = \sigma'\).
+#+end_lemma
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_lemma
+  If \(n \geq 3\), then \(A_{n}\) is generated by 3-cycles.
+#+end_lemma
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_definition
+  Let \(\sigma \in S_{n}\). We say \(\sigma\) is \indx{fixed-point-free} if \(\sigma(i) \neq i\) for all \(i\).
+#+end_definition
+
+#+begin_lemma
+  If \(H \leq S_{n}\) and \(H\) has the property that any non-identity \(\sigma\) is fixed-point-free, then \(|H| \leq n\).
+#+end_lemma
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_theorem
+  Let \(n \geq 5\). Then \(A_{n}\) is simple.
+#+end_theorem
+
+
+* Jordan-H\"older
+This section is about unique factorisation for groups.
+
+** Composition series
+
+#+begin_definition \label{def:group-theory:composition-series}
+  Let \(G\) be a group. A \indx{composition series} for \(G\) is a chain of subgroups
+
+  \[\{e\} = G_{0} \triangleleft G_{1} \triangleleft \ldots \triangleleft G_{s-1} \triangleleft G_{s} = G,\]
+
+  where \(G_{i} \neq G_{i+1}\) and \(G_{i+1}/G_{i}\) is simple for all \(i\).
+
+  We say that \(s\) is the \indx{length} of the composition series and the simple groups \(G_{i+1} / G_{i}\) are the \indx{composition factors}.
+#+end_definition
+
+#+begin_ex
+Here are some examples of composition series:
+
+1. \(\{0\} \triangleleft 4 \Z / 12 \Z \triangleleft 2\Z / 12\Z \triangleleft \Z/12\Z\).
+2. \(\{0\} \triangleleft 6 \Z / 12 \Z \triangleleft 3\Z / 12\Z \triangleleft \Z/12\Z\).
+#+end_ex
+
+#+begin_theorem [Jordan Holder]\label{thm:group-theory:Jordan-Holder}
+  Let \(G\) be a finite group. Then \(G\) has a composition series. Moreover, any two composition series have the same composition length and they have the same composition factors up to isomorphism of groups and order of the factors.
+#+end_theorem
+#+begin_proof
+ % TODO
+#+end_proof
+
+#+begin_theorem
+Let \(G\) be a finite group. Then \(G\) is isomorphic to one of:
+- Family 1: \(C_{p}\) for \(p\) prime;
+- Family 2: \(A_{n}\) for \(A_{n}\) with \(n \geq 5\);
+- 16 other infinite families;
+- 26 sporadic groups.
+#+end_theorem
+
+*** Existence
+#+begin_lemma \label{lem:group-theory:composing-composition-series}
+  Suppose \(G\) is a finite group with \(N \triangleleft G\). Let
+  \[\{e\} = G_{0} \triangleleft \ldots \triangleleft G_{s} = N \]
+  be a composition series for \(N\) be a composition series for \(N\), and
+  \[\{N\} = H_{0} \triangleleft \ldots \triangleleft H_{r} = G / N\]
+  be a composition series for \(G/N\). Then there is a composition series for \(G\) of length \(s + r\) whose composition factors are, in order,
+  \[G_{1}, G_{2}/G_{1}, \ldots, G_{s}/ G_{s-1}, H_{1}, H_{2}/H_{1}, \ldots, H_{r}/H_{r-1}.\]
+#+end_lemma
+
+#+begin_proof
+  As each \(H_{i}\) is a subgroup of \(G/N\), the~\nameref{thm:group-theory:the-correspondence-theorem} gives us that \(\can^{-1}(H_{i})\) is a subgroup of \(G\) containing \(N\). Defining \(G_{s + i} \coloneqq \can^{-1}(H_{i})\), we see that since \(H_{i} \triangle H_{i+1}\), \(G_{s+i} \triangleleft G_{s+i+1}\). the~\nameref{thm:group-theory:the-third-isomorphism-theorem} then gives that
+  \[G_{s+i+1} / G_{s+i} \iso (G_{s+i+1} / N) / (G_{s + i} / N) \iso H_{i+1} / H_{i}.\]
+  By assumption, \(H_{i+1} / H_{i}\) is simple, and so \(G_{0} \triangleleft \ldots G_{s+r} = G\) is a composition series for \(G\).
+#+end_proof
+
+
+#+begin_proposition
+  If \(G\) is a finite group, then \(G\) has a composition series.
+#+end_proposition
+
+#+begin_proof
+  We proceed by induction. If \(G\) is simple, then \(\{e\} \triangleleft G\) is a composition series. If \(G\) is not simple, then \(G\) contains a normal subgroup \(N\) with \(|N| < |G|\). By Lemma~\ref{lem:group-theory:composing-composition-series}, the composition series for \(N\) can be used to construct one for \(G\).
+#+end_proof
+
+*** Uniqueness
+The proof of uniqueness looks like a real pain. I will omit it for now.
+#+begin_theorem
+  Let \(G\) be a finite group. Then any two composition series have the same length and the same composition factors up to isomorphism and the order in which they are listed.
+
+  More precisely, if
+  \[\{e\} = G_{0} \triangleleft \ldots \triangleleft G_{s} = G\]
+  and
+  \[\{e\} = H_{0} \triangleleft \ldots \triangleleft H_{r} = G\]
+  are two composition series for \(G\), then \(s = r\) and there is a permutation \(\sigma\) of \(\{0, \ldots, s-1\}\) such that \(H_{i+1}/H_{i} \iso G_{\sigma(i) + 1} / G_{\sigma(i)}\), for all \(i = 0, \ldots, s-1\).
+#+end_theorem
+
+
+
+* Solvable groups
+Solvable groups are groups that can be built up using compositions series, from abelian groups. They play an important role in Galois theory.
+
+#+begin_definition
+  Let \(G\) be a group. A \indx{subnormal series} for \(G\) is a series of subgroups
+  \[\{e\} = G_{0} \triangleleft \ldots \triangleleft G_{s} = G\]
+#+end_definition
+
+#+begin_definition
+  A group \(G\) is \indx{solvable} (or \indx{soluble}) provided that it has a subnormal series
+  \[\{e\} = G_{0} \triangleleft \ldots \triangleleft G_{n} = G\]
+  such that each factor \(G_{i+1} / G_{i}\) is abelian.
+#+end_definition
+
+#+begin_ex
+1. Any abelian group \(A\) is solvable since \(\{e\} \triangleleft A\) is a suitable subnormal series.
+
+2. The group \(S_{3}\) is not abelian, but it is solvable, as the subnormal series \(\{e\} \triangleleft A_{3} \triangleleft S_{3}\) is suitable.
+
+3. The group \(S_{4}\) is solvable.
+
+4. The group \(A_{5}\) is not solvable as it is simple and not abelian.
+
+5. Any finite \(p\)-group is solvable.
+#+end_ex
+
+Solvability is related to composition series.
+
+#+begin_lemma \label{lem:group-theory:composition-factors-are-cyclic}
+  If \(A\) is a finite abelian group of order \(p_{1}^{n_{1}} p_{2}^{n_{2}} \ldots p_{k}^{n_{k}}\), then the composition factors of \(A\) are
+  \[\underbrace{C_{p_{1}}, \ldots, C_{p_{1}}}_{n_{1}} , \underbrace{C_{p_{2}}, \ldots, C_{p_{2}}}_{n_{2}} , \ldots , \underbrace{C_{p_{k}}, \ldots, C_{p_{k}}}_{n_{k}}\]
+  in some order.
+#+end_lemma
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_theorem
+  A finite group G is solvable if and only if all the composition factors of \(G\) are cyclic.
+#+end_theorem
+
+#+begin_proof
+  If the composition factors are cyclic, they are abelian, and \(G\) is solvable. Let \(G\) be solvable and let
+  \[\{e\} = G_{0} \triangleleft \ldots \triangleleft G_{n} = G\]
+  be a subnormal series with abelian factors and assume (without loss of generality that \(G_{i} \neq G_{i-1}\)). By induction, the composition factors of \(G_{s-1}\) are cyclic and \(G_{s}/G_{s-1}\) is abelian. By Lemma~\ref{lem:group-theory:composition-factors-are-cyclic}, the composition factors are cyclic.
+#+end_proof
+
+#+begin_theorem
+  Let \(G\) be a group and let \(N \triangleleft G\). Then \(G\) is solvable if and only if \(N\) and \(G/N\) are solvable.
+#+end_theorem
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_theorem
+  If \(G\) is solvable and \(H \leq G\) then \(H\) is solvable.
+#+end_theorem
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+** Derived subgroups and the derived series
+
+#+begin_definition
+  Let \(G\) be a group. The \indx{commutator} of two elements \(a, b \in G\) is the element \(aba^{-1}b^{-1}\), ans is often denoted by \([a,b]\). The \indx{commutator subgroup} or \indx{derived subgroup} \(G'\) of a group \(G\) is the subgroup generated by all possible commutators in \(G\). That is,
+  \[G' \coloneqq \langle aba^{-1}b^{-1} | a, b \in G \rangle.\]
+#+end_definition
+
+#+begin_theorem
+  Let \(G\) be a group and let \(N\) be a normal subgroup of \(G\). Then \(G / N\) is abelian if and only if \(G' \subseteq N\). In particular, \(G/G'\) is abelian.
+#+end_theorem
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_definition
+  Let \(G\) be a group. Set \(G^{(0)} \coloneqq G\) and for each \(i \geq 0\), set \(G^{(i+1)} \coloneqq (G^{(i)})'\). The sequence
+  \[G = G^{(0)}\triangleright G^{(1)} \triangleright \ldots \]
+  is called the \indx{derived series} of \(G\).
+#+end_definition
+
+#+begin_theorem
+  A group \(G\) is solvable if and only if there is an \(n\) with \(g^{(n)} = \{e\}\).
+#+end_theorem
+
+#+begin_proof
+  % TODO
+#+end_proof
+
+#+begin_definition
+  Let \(G\) be a solvable group. Then \(G^{(n)} = \{e\}\) for some \(n\). The least such \(n\) is the \indx{derived length} of \(G\).
+#+end_definition
+
+#+begin_theorem [Feit-Thompson, 1963]
+  Let \(G\) be a finite group with odd order. Then \(G\) is solvable.
+#+end_theorem
+
+* Questions and solutions
+\label{sec:group-theory:questions}
+** Lagrange and group homomorphisms
+\begin{questions}
+  \begin{question}
+    Let \(H\) and \(K\) be subgroups of a group \(G\). Show that \(H \cap K\) is a subgroup of \(G\). When is \(H \cup K\) a subgroup of \(G\)?
+  \end{question}
+
+  \begin{solution}
+    It is clear that if \(h \in H \cap K\), then \(h^{-1} \in H\) and \(k^{-1} \in K\), hence \(h^{-1} \in H \cap K\). Therefore, for all \(h, k \in H \cap K\), \(hk^{-1} \in H \cap K\).
+
+    \(H \cup K\) is a subgroup of \(G\) precisely when \(H \subseteq K\) or \(K \subseteq H\). For the sake of contradiction, assume \(H \not\subseteq K\) and \(K \not\subseteq H\). This means that there exists \(h \in H\) such that \(h \not\in K\) and \(k \in K\) such that \(k \not\in H\). Assuming that \(H \cup K\) is a subgroup of \(G\), \(hk \in H \cup K\) and so \(hk \in H\) or \(hk \in K\). This implies that either \(k \in H\) or \(h \in K\), which is a contradiction. The reverse implication holds clearly.
+  \end{solution}
+
+  \begin{question}
+    Let \(\mu_{8}\) be the set of eighth roots of unity in \(\C^{*}\). What is the order of \(\mu_{8}\)? Find the elements \(g \in \mu_{8}\) such that \(\langle g \rangle = \mu_{8}\).
+  \end{question}
+
+  \begin{solution}
+    The set of eighth roots of unity is \(\{z \in \C^{*} \mid z^{8} = 1\}\). There are exactly eight roots, by the fundamental theorem of algebra. Let \(\omega = e^{2i\pi/8}\). The generators of \(\mu_8\) are then \(\{\omega, \omega^{3}, \omega^{5}, \omega^{7}\}\). This is because these are the only elements of \(\mu_{8}\) whose exponents are coprime to \(8\).
+  \end{solution}
+
+  \begin{question}
+    Let \(F\) be a finite field with \(q\) elements, and \(n \in \N\). Show that the order of \(GL(n, F)\) is \(\prod_{i = 0}^{n-1}(q^{n} - q^{i})\).
+  \end{question}
+
+  \begin{solution}
+    Let \(A\) be an \(n \times n\) invertible matrix over \(F\). The first row can be anything except a zero row, so there are \(q^{n} - 1\) possibilities. For the next row, it can't be a scalar multiple of the first row, so there are \(q^{n} - q\) possibilities for the second row. The next row can't be a linear combination of the previous two rows and there are exactly \(q^{2}\) ways to do that, so there are \(q^{n} - q^{2}\) options. Generalising the pattern, we see that there are
+    \[\prod_{i = 1}^{n-1} (q^{n} - q ^{i}),\]
+    as required.
+  \end{solution}
+\end{questions}
+
+** Isomorphism theorems
+\begin{questions}
+  \begin{question}
+    The \indx{special orthogonal group} \(SO(n)\) is defined as the set of all \(2 \times 2\) real orthogonal matrices \(A\) with \(\det(A) = 1\). Show that every element of \(SO(2)\) has the form
+    \[\begin{pmatrix}
+      \cos(\theta) & -\sin(\theta) \\
+      \sin(\theta) & \cos(\theta)
+    \end{pmatrix}\]
+    for some \(\theta \in \R\).
+  \end{question}
+
+  \begin{solution}
+    % TODO
+  \end{solution}
+
+  \begin{question}
+   Show that \(SO(2)\) and \(\mu = \{z \in \C \mid |\| = 1 \}\).
+  \end{question}
+
+  \begin{solution}
+    The isomorphism between the two groups is the function
+    \[\begin{pmatrix}
+      \cos(\theta) & -\sin(\theta) \\
+      \sin(\theta) & \cos(\theta)
+    \end{pmatrix} \mapsto e^{i (\theta \mod 2\pi)}\]
+  \end{solution}
+
+  We need to take theta \(\mod 2 \pi\) to make the homomorphism injective.
+
+  \begin{question}
+    Consider \(\Z\) and \(\R\) as groups under addiction. Prove that \(\R / \Z \iso \mu\).
+  \end{question}
+
+  \begin{solution}
+    Take the function \(x \mapsto e^{ix2\pi}\) from \(\R \to \mu\). This is a surjective group homomorphism with kernel equal to \(\Z\). The~\nameref{thm:group-theory:first-isomorphism-theorem} gives us \(\R/\Z \iso \mu\).
+  \end{solution}
+
+  \begin{question}
+    Find all subgroups of \(\Z, +\) that contain \(60\Z\) and find all subgroups of \(\Z / 60\Z\) and draw a diagram indicating the inclusions among the subgroups.
+  \end{question}
+
+  \begin{solution}
+    We use the~\nameref{thm:group-theory:the-correspondence-theorem} to map between subgroups of \(\Z/60\Z\) and subgroups containing \(60\Z\).
+    \begin{center}
+      \begin{tikzcd}
+        & 60\Z                                                           &                                                               &                                            &                                               & \Z/60\Z                                                           &                                                                   &                                               \\
+        12\Z \arrow[ru, no head]                   & 20\Z \arrow[u, no head]                                        & 30\Z \arrow[lu, no head]                                      &                                            & \Z/12\Z \arrow[ru, no head]                   & \Z/20\Z \arrow[u, no head]                                        & \Z/30\Z \arrow[lu, no head] \arrow[ld, no head]                   &                                               \\
+        4\Z \arrow[u, no head] \arrow[ru, no head] & 6\Z \arrow[lu, no head] \arrow[ru, no head]                    & 10\Z \arrow[lu, no head] \arrow[u, no head]                   & 15\Z \arrow[lu, no head]                   & \Z/4\Z \arrow[u, no head] \arrow[ru, no head] & \Z/6\Z \arrow[lu, no head]                                        & \Z/10\Z \arrow[u, no head] \arrow[lu, no head]                    & \Z/15\Z \arrow[lu, no head]                   \\
+        & 2\Z \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] & 3\Z \arrow[lu, no head] \arrow[ru, no head]                   & 5\Z \arrow[lu, no head] \arrow[u, no head] &                                               & \Z/2\Z \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] & \Z/3\Z \arrow[u, no head] \arrow[ru, no head] \arrow[lu, no head] & \Z/5\Z \arrow[lu, no head] \arrow[u, no head] \\
+        &                                                                & \Z \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] &                                            &                                               &                                                                   & \{e\} \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head]  &
+      \end{tikzcd}
+    \end{center}
+  \end{solution}
+
+  \begin{question}
+    Let \(Z\) denote the centre of \(SL(n, K)\). Then the \indx{projective special linear group} \(PSL(n, K)\) is defined to be the quotient group \(SL(n, K) / Z\). Find the centre \(Z\) of \(SL(2, \Z_{3})\). What is the order of \(PSL(2, \Z_{3})\).
+  \end{question}
+
+  \begin{solution}
+    Recall that the centre of a group is exactly the set of elements that commute with all other elements in the groups. The centre of \(SL(2, \Z_{3})\) consists of all matrices... % TODO:finish this solution
+  \end{solution}
+
+  \begin{question}
+    Show that is \(G\) is a group, \(N\) is a subgroup of \(G\) contained in the centre of \(G\) and \(G/N\) is cyclic, then \(G\) is abelian.
+  \end{question}
+
+  \begin{solution}
+    Let \(g, h \in G\). Then as cosets partition \(G\), \(g \in aN\) and \(h \in bN\), for some \(a,b \in G\). As \(G/N\) is cyclic, \(aN = k^{j}N\) and \(bN = k^{i}N\) for some \(k \in G\) and \(i,j \in \N\). Then,
+    \begin{align*}
+      gh &= k^{j}n_{1} k^{i}n_{2}, \\
+         &= k^{j} k^{i}n_{1} n_{2} & n_{1} \in Z(G), \\
+         &= k^{j} k^{i}n_{2} n_{1} & n_{2} \in Z(G), \\
+         &= k^{i} k^{j}n_{2} n_{1}, \\
+         &= k^{i} n_{2} k^{j} n_{1} & n_{2} \in Z(G) \\
+         &= hg.
+    \end{align*}
+    Therefore, \(G\) is abelian.
+  \end{solution}
+
+  \begin{question}
+    Show that \(G \times \{e_{H}\}\) is a normal subgroup of \(G \times H\) that is isomorphic to \(G\) and that the quotient group \((G \times H)/G \times \{e_{H}\}\).
+  \end{question}
+
+  \begin{solution}
+    To see that \(G \times \{e_{H}\}\) is normal, we see that it is the kernel of the map \((g,h) \mapsto h\) from \(G \times H \to H\). It is clear that it is isomorphic to \(G\) and that the map is surjective. By the~\nameref{thm:group-theory:first-isomorphism-theorem}, \((g \times H) / G \times \{e_{H}\} \iso H\).
+  \end{solution}
+\end{questions}
+
+** Sylow theory
+\begin{questions}
+  \begin{question}
+    Let \(p\) be a prime and \(G\) a \(p\)-group. Show that \(G\) contains an element of order \(p\).
+  \end{question}
+
+  \begin{solution}
+    By Lemma~\ref{lem:group-theory:p-group-has-order-p^n}, \(|G| = p^{n}\) for some \(n \in \N\). Then, by~\nameref{thm:group-theory:cauchys-theorem}, \(G\) has a subgroup and hence an element of order \(p\).
+  \end{solution}
+
+  \begin{question}
+    Let \(|G| = p^{n}\). Show that \(G\) contains a normal subgroup of order \(p^{i}\) for each \(i = 0, 1, \ldots, n\).
+  \end{question}
+
+  \begin{solution}
+    This is true when \(n = 1\), so we proceed by strong induction. Consider \(G\) to have order \(p^{n}\). By theorem~\ref{thm:group-theory:p-group-non-trivial-centre}, \(G\) has a non-trivial centre, which must have order \(p^{m}\) for some \(0 < m < n\). By induction hypothesis, there are normal subgroups of orders \(p^{1}, \ldots, p^{m}\) in \(Z(G)\) which are therefore normal subgroups of \(G\), since all elements of \(Z(G)\) commute with all elements in \(G\). The quotient group \(G / Z(G)\) then has order \(p^{n - m}\), and so by induction hypothesis has normal subgroups of order \(p^{1}, \ldots, p^{n-m}\). By the~\nameref{thm:group-theory:the-correspondence-theorem}, these normal subgroups correspond to normal subgroups of \(G\) containing \(Z(G)\). Let \(H_{i}\) be the normal subgroup of \(G/Z(G)\) of order \(p^{i}\). Then by~\nameref{thm:group-theory:Lagranges-theorem}, \(p^{n-m} = [G/Z(G) : H_{i}] p^{i}\), and so \([G/Z(G) : H_{i}] = p^{n-m-i}\). By lemma \ref{lem:group-theory:index-of-quotients}, we have that \([G/Z(G) : H_{i}] = [G : \hat{H_{i}}] = p^{n-m-i}\), we have \(|\hat{H_{i}}| = p^{n - (n - m - i)} = p^{m + i}\) for \(i = 1, \ldots n-m\). This constructs all of the required normal subgroups of \(G\) groups.
+  \end{solution}
+\end{questions}
