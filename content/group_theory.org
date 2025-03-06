@@ -4,7 +4,7 @@
 #+title: Group Theory
 #+filetags: :algebra:
 
-Group theory is an area of [[id:c0844b39-e6cd-45c5-9135-495a9b017de7][Algebra]] that deals with the study of symmetries, or more abstractly, automorphisms. 
+Group theory is an area of [[id:c0844b39-e6cd-45c5-9135-495a9b017de7][Algebra]] that rigorously studies symmetries, or more abstractly, automorphisms. 
 
 * Overview
 * Summary of important results
@@ -31,7 +31,7 @@ The *order* of an element \(g \in G\) is the smallest natural number \(n\) such 
 \[g^{n} \coloneqq \underbrace{g \bullet g \bullet \ldots \bullet g}_{n} = e.\]
 #+END_definition
 
-Often a group \((G, \bullet, e)\) is denoted just by its underlying carrier set \(G\).
+Often a group \((G, \bullet, e)\) is denoted just by its underlying carrier set \(G\). Where the group operation is unambiguous, we shall often leave it out and write \(gh\) for \(g \bullet h\).
 
 ** Examples
 
@@ -54,3 +54,67 @@ The [[id:0788fd30-3481-4a77-a965-a3bf7473db9c][symmetric group]] on \(n\) elemen
 #+begin_ex
 The \(n^{\text{th}}\) [[id:ffa38abd-00f5-4f5c-b03d-e56c800a74ff][dihedral group]] is the group of symmetries of the \(n\)-gon.
 #+end_ex
+
+
+#+name: abelian
+#+BEGIN_definition
+A group \(G\) is called *abelian* if for all \(g, h \in G\), \(gh = hg\).
+#+END_definition
+
+** Subgroups and Lagrange's Theorem
+:PROPERTIES:
+:ID:       6b435ffa-c898-4248-ab66-8be39e8ad82e
+:END:
+Like usual algebraic objects, we define a subgroup to be a subset which is closed under the same group operations as its main group.
+
+#+name: subgroup
+#+BEGIN_definition
+A *subgroup* \(H\) of a group \(G\) is a subset \(H \subset G\) such that the following hold:
+1. For all \(h, k \in H\), \(hk \in H\);
+2. For all \(h \in H\), \(h^{-1} \in H\).
+
+We write \(H \leq G\) to say that \(H\) is a subgroup of \(G\).
+#+END_definition
+
+The following lemma gives equivalent criterion for a subset being a subgroup.
+#+BEGIN_lemma
+Let \(H \subset G\). Then, \(H \leq G\) if and only if \(hk^{-1} \in H\) for all \(h, k \in H\).
+#+END_lemma
+
+#+BEGIN_proof
+#+END_proof
+
+#+BEGIN_ex
+The group of rotations of an \(n\)-gon are a subgroup of \(D_n\).
+#+END_ex
+
+#+BEGIN_ex
+The [[id:9675948a-b4be-49b2-84dd-7d63a715d62f][alternating group]] \(A_n\) is a subgroup of \(S_n\).
+#+END_ex
+
+
+#+name: cosets
+#+BEGIN_definition
+Let \(H \leq G\) and \(g \in G\). The *left coset* of \(H\) determine by \(g\) is the set
+
+\[ gH \coloneqq \{ gh \mid h \in H \}. \]
+
+Similarly, the *right coset* of \(H\) determined by \(G\) is
+
+\[Hg \coloneqq \{hg \mid h \in H\}. \]
+
+
+The number of left cosets of a subgroup \(H \leq G\) is called the *index* of \(H\) in \(G\) and is denoted \([G:H]\).
+#+END_definition
+
+\[ gH \coloneqq \{ gh \mid h \in H  \} \]
+
+#+BEGIN_lemma
+Let \(H \leq G\) be a subgroup. Then the cosets \(gH\) partition the group \(G\).
+#+END_lemma
+
+#+begin_proof
+Suppose that \(g \in aH\) and \(g \in bH\), for some \(a, b \in G\). Then some simple algebra shows that \(a \in bH\) and \(b \in aH\), from which we deduce that \(a = b h_{1}\) and \(b = a h_2\) for some \(h_{1}, h_{2} \in H\). Then any \(ah \in aH\) is equal to \(bh_{1}h \in bH\), so \(aH \subset bH\).
+
+Similarly, we can show that \(bH \subset aH\), and so \(aH = bH\). Therefore \(aH = bH\) or \(aH \cap bH = \emptyset\). It is also clear that every \(g \in G\) is in \(gH\), and so cosets partition \(G\).
+#+end_proof

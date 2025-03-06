@@ -2,7 +2,7 @@ body {
     font-family: "DejaVu Serif", "Cambria", Serif !important;
     font-size: 18px;
     text-align: justify;
-    background-color: #D8DEE9;
+    background-color: #fffffa;
     color: #2E3440;
     margin-left: 1.0em;
 }
@@ -141,10 +141,6 @@ span.backintime {
     font-size: .45em;
     top: 10px;
     left: 20px;
-}
-
-#pageName > span > svg {
-    margin: 0;
 }
 
 #pageName > span.webName {
@@ -302,7 +298,7 @@ mtext {
 
 .theorem:before {
     counter-increment: theorem;
-    content: "Theorem " counter(theorem) ". ";
+    content: "Theorem " counter(theorem) ".\00a0\00a0";
     font-weight: bold;
     font-style: normal;
 }
@@ -321,7 +317,8 @@ mtext {
 
 .lemma:before {
     counter-increment: theorem;
-    content: "Lemma " counter(theorem) ". ";
+    content: "Lemma " counter(theorem) ".\00a0\00a0";
+    float:left;
     font-weight: bold;
     font-style: normal;
 }
@@ -334,10 +331,10 @@ mtext {
 
 .ex:before {
     counter-increment: theorem;
-    content: "Example " counter(theorem) ". ";
+    content: "Example " counter(theorem) ".\00a0\00a0";
     font-weight: bold;
     font-style: normal;
-    display: inline;
+    float:left;
 }
 
 .definition {
@@ -355,8 +352,11 @@ mtext {
 }
 
 .definition:before {
+    margin: 18px 0;
+    display: block;
     counter-increment: theorem;
-    content: "Definition " counter(theorem) ". ";
+    content: "Definition " counter(theorem) ".\00a0\00a0";
+    float:left;
     font-weight: bold;
     font-style: normal;
 }
@@ -367,7 +367,9 @@ mtext {
     margin-bottom:30px;
     font-style:normal;
     padding-bottom: 1rem;
+    max-width: 50em;
 }
+
 .proof:before{
     content:'Proof.\00a0\00a0';
     float:left;
@@ -386,7 +388,8 @@ mtext {
 
 .proposition:before {
     counter-increment: theorem;
-    content: "Proposition " counter(theorem) ". ";
+    content: "Proposition " counter(theorem) ".\00a0\00a0";
+    float:left;
     font-weight: bold;
     font-style: normal;
 }
@@ -400,8 +403,9 @@ mtext {
 
 .corollary:before {
     counter-increment: theorem;
-    content: "Corollary " counter(theorem) ". ";
+    content: "Corollary " counter(theorem) ".\00a0\00a0";
     font-weight: bold;
+    float:left;
     font-style: normal;
 }
 

@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       9675948a-b4be-49b2-84dd-7d63a715d62f
+:END:
+#+title: Alternating Group

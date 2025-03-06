@@ -1,6 +1,7 @@
 #+TITLE: Sitemap for project jlab
 
 - [[file:algebra.org][Algebra]]
+- [[file:alternating_group.org][Alternating Group]]
 - [[file:category_theory.org][Category Theory]]
 - [[file:dihedral_group.org][Dihedral group]]
 - [[file:group_theory.org][Group Theory]]

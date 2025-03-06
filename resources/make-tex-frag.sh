@@ -51,9 +51,13 @@ lualatex --interaction=nonstopmode \
 
 dvisvgm "$dvi_file" \
 	-n \
-	-b \
-	min \
+	-b min \
 	-c 1.5 \
-	-o "$svg_file" &>/dev/null
+	-O none \
+	--relative \
+	-v 0 \
+	--stdout |
+	sed "s/id='/id='$hash/g" |
+	sed "s/xlink:href='#/xlink:href='#$hash/g" >$svg_file
 
 cat $svg_file
