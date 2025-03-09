@@ -14,8 +14,11 @@
 (package-install 'org-roam)
 (require 'ox-publish)
 (require 'org-ref)
+(require 'org-ref-refproc)
 (require 'org-roam)
 
+
+;; (setq 'org-export-before-parsing-hook '(org-ref-refproc))
 
 ;; Very simplified version of org-ref-export-to from org-ref-export.el
 ;; that export to filename
@@ -87,5 +90,4 @@
                 "\n"
                 ))
 
-(message (dired-make-absolute "content"))
-(org-publish-all t)
+(org-publish-all)
