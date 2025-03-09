@@ -13,5 +13,62 @@ The Ubermensch (or Superman in [[cite:&Nietzsche1964-cq]]) is Nietzsche's idea f
 
 The opposite of the superman is the Ultimate Man.
 
+* Book chapters
+
+** Zarathustra's Prologue
+:LOGBOOK:
+CLOCK: [2025-03-09 Sun 18:29]
+:END:
+This Part introduces us to Zarathustra, who has been a hermit in the mountains for 10 years. He then decides that he is ready to come back down into the world to share the wisdom he has gained.
+
+He first meets a monk in the forest. Upon asking why the monk is in the forest, the monk responds
+
+#+begin_quote
+I make songs and sing them, and when I make songs, I laugh, weep and mutter: thus I praise God. [[cite:&Nietzsche1964-cq]] 
+#+end_quote
+
+When Zarathustra leaves him and is alone, he says to himself of the monk the following:
+
+#+begin_quote
+Could it be possible! This old saint has not yet heard in his forest that /God is dead!/[[cite:&Nietzsche1964-cq]] 
+ #+end_quote
+
+The theme of /God is dead/ is a core idea in Nietzsche's work. The famous quote about the death of God is from his book /The Gay Science/
+
+#+begin_quote
+God is dead. God remains dead. And we have killed him. How shall we, the murderers of all murderers, console ourselves?That which was holiest and mightiest of all that the world has yet possessed has bled to death under out knives - who will wipe this blood off us? ... Is not the greatness of this deed to great for us? Must not we ourselves become gods simply to seem worthy of it? [[cite:&Nietzsche1910-NIETGS]] 
+#+end_quote
+
+Zarathustra then makes his way to a near by town, and tells the townspeople of the Superman.
+#+begin_quote
+/I teach you the Superman/. Man is something that should be overcome. What have you done to overcome him? [[cite:&Nietzsche1964-cq]]
+#+end_quote
+
+It is not clear to me what is meant by the Superman here. Nietzsche is characteristically vague and mainly describes just how weak man is compared to the Superman.
+
+#+begin_quote
+Man is a rope, fastened between animal and Superman - a rope over an abyss... What is great in man is that he is a bridge and not a goal; what can be loved in man is that he is a /going-across/ and a /down-going/. [[cite:&Nietzsche1964-cq]] 
+#+end_quote
+
+What does this mean? What does /going-across/ and a /down-going/ mean?
+
+I tightrope walker then begins to walk out on a rope suspended above the crowds, but he is disrupted by someone that joins him on the rope and jumps over him. The tightrope walker falls to his death. Before dying, Zarathustra talks to him. The dying man mentions that he knew the Devil would trip him up and drag him to hell. Zarathustra responds:
+
+#+begin_quote
+On my honour, friend,... all you have spoken of does not exist: there is no Devil and no Hell. Your soul will be dead even before your body: therefore fear no more![[cite:&Nietzsche1964-cq]]
+#+end_quote
+
+The dying man is upset by this, thinking that his life now is worthless. Zarathustra responds
+
+#+begin_quote
+Not so,..., You have made danger your calling, there is nothing in that to despise. Now you perish through your calling: so I will bury you with my own hands. [[cite:&Nietzsche1964-cq]]  
+#+end_quote
+
+Zarathustra sees something in the life of this tightrope walker. He didn't live a meaningless life but one of meaning through his work and talent. He lived dangerously and took risks. He appreciates this enough to bury him with his own hands.
+
+
+** Zarathustra's Discourses
+
 * References
 bibliography:bibliography.bib
+
