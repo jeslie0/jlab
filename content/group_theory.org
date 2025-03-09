@@ -69,12 +69,14 @@ Like usual algebraic objects, we define a subgroup to be a subset which is close
 
 #+name: subgroup
 #+BEGIN_definition
-A *subgroup* \(H\) of a group \(G\) is a subset \(H \subset G\) such that the following hold:
+A *subgroup* \(H\) of a group \(G\) is a non empty subset \(H \subset G\) such that the following hold:
 1. For all \(h, k \in H\), \(hk \in H\);
 2. For all \(h \in H\), \(h^{-1} \in H\).
 
 We write \(H \leq G\) to say that \(H\) is a subgroup of \(G\).
 #+END_definition
+
+It should be clear that these properties imply that \(e_G \in H\).
 
 The following lemma gives equivalent criterion for a subset being a subgroup.
 #+BEGIN_lemma
@@ -82,6 +84,9 @@ Let \(H \subset G\). Then, \(H \leq G\) if and only if \(hk^{-1} \in H\) for all
 #+END_lemma
 
 #+BEGIN_proof
+Suppose that \(h, k \in H\). Since \(h^{-1}^{-1} = h\), we have \(h k^{-1}^{-1} = h k \in H\). Since \(e \in H\), we have \(e h^{-1} = h^{-1} \in H\).
+
+Now suppose that \(h, k \in H\). Then \(h^{-1} \in H\) and so \(h k^{-1} \in H\).
 #+END_proof
 
 #+BEGIN_ex
@@ -160,11 +165,11 @@ Lagrange's Theorem can be used to prove Fermat's second most famous theorem.
 
 #+name: thm:group-theory:fermats-little-theorem}
 #+begin_theorem [Fermat's Little Theorem]
-If \(p\) is a prime and \(a \in \Z\), then \(a^{p} \equiv a \mod p\).
+If \(p\) is a prime and \(a \in \mathbb{Z}\), then \(a^{p} \equiv a \mod p\).
 #+end_theorem
 
 #+begin_proof
-This holds trivially for \(a = 0\), so assume \(a \not\equiv 0 mod p\). Then, \(g\) is in the multiplicative group of units \(\Z^{*}_{p}\), which has order \(p-1\). Since raising an element to the order of the group is the identity, \(a^{p-1} \equiv 1 \mod p\), and so \(a^{p} \equiv a \mod p\).
+This holds trivially for \(a = 0\), so assume \(a \not\equiv 0 mod p\). Then, \(g\) is in the multiplicative group of units \(\mathbb{Z}^{*}_{p}\), which has order \(p-1\). Since raising an element to the order of the group is the identity, \(a^{p-1} \equiv 1 \mod p\), and so \(a^{p} \equiv a \mod p\).
 #+end_proof
 
 Wilson's Theorem also follows as an application of Lagrange's Theorem.
@@ -172,7 +177,7 @@ Wilson's Theorem also follows as an application of Lagrange's Theorem.
 #+name: Wilson's Theorem
 #+begin_theorem
 If \(p\) is a prime number then the following hold:
-  1. In \(\Z^{*}_{p}\), only \(1\) and \(p-1\) are their own inverses.
+  1. In \(\mathbb{Z}^{*}_{p}\), only \(1\) and \(p-1\) are their own inverses.
   2. \((p - 1)! \equiv -1 \mod p\).
 #+end_theorem
 
@@ -219,7 +224,7 @@ Let \(C_{n}\) be the *cyclic group of order \(n\)*, which is defined as the set 
 The function
 
 \[\begin{align*}
-  \phi : \Z &\to C_{n} \\
+  \phi : \mathbb{Z} &\to C_{n} \\
   a &\mapsto g^{a}
 \end{align*}\]
 
@@ -228,9 +233,9 @@ is a group homomorphism.
 
 #+name: def:group-theory:group-isomorphism
 #+begin_definition
-Let \(G, H\) be groups and \(\psi : G \to H\) a group homomorphism. We say that \(\phi\) is a *group isomorphism* if there is a group homomorphism \(\psi\) such that \(phi\) and \(\psi\) are inverse functions.
+Let \(G, H\) be groups and \(\psi : G \to H\) a group homomorphism. We say that \(\phi\) is a *group isomorphism* if there is a group homomorphism \(\psi\) such that \(\phi\) and \(\psi\) are inverse functions.
 
-If there exists an isomorphism \(\psi : G \to H\), we say \(G\) and \(H\) are *isomorphic as groups*, and write \(G \iso H\).
+If there exists an isomorphism \(\psi : G \to H\), we say \(G\) and \(H\) are *isomorphic as groups*, and write \(G \cong H\).
 #+end_definition
 
 #+name: lem:group-theory:groups-of-order-p-are-isomorphic
@@ -239,7 +244,7 @@ If \(p\) is a prime number, then all groups of order \(p\) are isomorphic.
 #+end_lemma
 
 #+begin_proof
-Let \(G, H\) be groups of order \(p\). Then, every non-identity element has order \(p\), since by Lagrange's Theorem every non-trivial subgroup is equal to the whole group. Choose a non-identity element \(g \in G\) and \(h \in H\). The function mapping \(g^{n} \mapsto h^{n}\) is well defined and is a bijective group homomorphism. Hence, \(G \iso H\).
+Let \(G, H\) be groups of order \(p\). Then, every non-identity element has order \(p\), since by Lagrange's Theorem every non-trivial subgroup is equal to the whole group. Choose a non-identity element \(g \in G\) and \(h \in H\). The function mapping \(g^{n} \mapsto h^{n}\) is well defined and is a bijective group homomorphism. Hence, \(G \cong H\).
 #+end_proof
 
 #+begin_lemma
@@ -252,7 +257,7 @@ This is the same proof as Lemma~\ref{lem:group-theory:groups-of-order-p-are-isom
 
 Given a group homomorphism, we can always extract a new group from it.
 #+begin_definition
-Let \(\phi:G \to H\) be a group homomorphism. The *kernel* of \(\phi\) is the subset \(\{g \in G \mid \phi(g_) = e\}\).
+Let \(\phi:G \to H\) be a group homomorphism. The *kernel* of \(\phi\) is the subset \(\{g \in G \mid \phi(g) = e\}\).
 #+end_definition
 
 #+name: lem:group-theory:kernels-are-subgroups
@@ -290,7 +295,7 @@ Let \(G\) be a group. The set of all isomorphisms \(\phi : G \to G\) forms a gro
 #+end_definition
 
 #+begin_ex
-For prime \(p\), \(\Aut(C_{p}) \iso \Z^{*}_{p} \iso C_{p-1}\).
+For prime \(p\), \(\Aut(C_{p}) \cong \mathbb{Z}^{*}_{p} \cong C_{p-1}\).
 #+end_ex
 
 #+begin_definition
@@ -305,7 +310,7 @@ Let \(H\) and \(K\) be subgroups of a group \(G\), such that \(H \cup K = \{e\}\
 #+end_definition
 
 #+begin_lemma
-If \(G\) is the internal direct product of \(H, K\) then each element of \(G\) can be written uniquely in the form \(g = hk\) for some \(h \in H\) and \(k \in K\). This gives rise to an isomorphism \(G \iso H \times K\).
+If \(G\) is the internal direct product of \(H, K\) then each element of \(G\) can be written uniquely in the form \(g = hk\) for some \(h \in H\) and \(k \in K\). This gives rise to an isomorphism \(G \cong H \times K\).
 #+end_lemma
 
 #+begin_proof
@@ -313,7 +318,7 @@ Since \(G = HK\), for every \(g \in G\), there does exist a pair \((h,k) \in H \
 #+end_proof
 
 #+begin_ex
-For coprime \(m, n\), \(C_{m} \times C_{n} \iso C_{mn}\). The element \((1,1) \in C_{m} \times C_{n}\) must have order \(mn\), hence \(\langle (1,1)\rangle= \C_{m} \times C_{n}\) is isomorphic to the cyclic group of order \(mn\). If there is a \(1 < k < mn\) such that \((1,1)^{k} = (0,0)\), then \(k\) would need to share a factor of both \(m\) and \(n\), which would contradict coprimality.
+For coprime \(m, n\), \(C_{m} \times C_{n} \cong C_{mn}\). The element \((1,1) \in C_{m} \times C_{n}\) must have order \(mn\), hence \(\langle (1,1)\rangle= C_{m} \times C_{n}\) is isomorphic to the cyclic group of order \(mn\). If there is a \(1 < k < mn\) such that \((1,1)^{k} = (0,0)\), then \(k\) would need to share a factor of both \(m\) and \(n\), which would contradict coprimality.
 #+end_ex
 
 
@@ -418,15 +423,15 @@ Let \(\theta : G \to H\) be a group homomorphism. Then, \(N \coloneqq \ker\phi\)
 
 \[\bar \theta : G / N \to \Im \theta.\]
 
-In particular, if \(\theta\) is surjective, then \(G / \ker(\theta) \iso H\).
+In particular, if \(\theta\) is surjective, then \(G / \ker(\theta) \cong H\).
 #+end_theorem
 
 #+begin_proof
-The map \(\bar \theta\) is given by Theorem~\ref{thm:group-theory:universal-property-of-quotient-groups}. It is clear that the image of \(\bar\theta\) is \(\Im \theta\), since \(\theta(g) = \bar \theta(gN)\), and if \(\bar\theta\) is surjective, it witnesses an isomorphism \(G/\ker(\theta) \iso \Im \theta\).
+The map \(\bar \theta\) is given by Theorem~\ref{thm:group-theory:universal-property-of-quotient-groups}. It is clear that the image of \(\bar\theta\) is \(\Im \theta\), since \(\theta(g) = \bar \theta(gN)\), and if \(\bar\theta\) is surjective, it witnesses an isomorphism \(G/\ker(\theta) \cong \Im \theta\).
 #+end_proof
 
 #+begin_ex
-There is a surjective group homomorphism \(\exp : (\C, +) \to (\C^{*}, \times)\). The kernel of \(\exp\) is the set \(N = \{2k\pi i \mid k \in \Z\}\), so \(\C^{*} \iso \C/N\).
+There is a surjective group homomorphism \(\exp : (\mathbb{C}, +) \to (\mathbb{C}^{*}, \times)\). The kernel of \(\exp\) is the set \(N = \{2k\pi i \mid k \in \mathbb{Z}\}\), so \(\mathbb{C}^{*} \cong \mathbb{C}/N\).
 #+end_ex
 
 
@@ -502,19 +507,19 @@ Let \(G\) be a group with \(N \triangleleft G\) and \(\theta: G \to G/N\) the ca
 #+end_proof
 
 #+begin_ex
-  Since \(\Z\) is abelian, all of its subgroups are normal.
+  Since \(\mathbb{Z}\) is abelian, all of its subgroups are normal.
   %
-  We can determine all of the subgroups of \(\Z/12Z\) by finding all of the subgroups of \(\Z\) that contain \(12\Z\).
+  We can determine all of the subgroups of \(\mathbb{Z}/12Z\) by finding all of the subgroups of \(\mathbb{Z}\) that contain \(12\mathbb{Z}\).
   %
-  These are \(\Z, 2\Z, 3\Z\) and \(4\Z\).
+  These are \(\mathbb{Z}, 2\mathbb{Z}, 3\mathbb{Z}\) and \(4\mathbb{Z}\).
   %
-  Under the correspondence, they give the subgroups \(12\Z\), \(2\Z / 12\Z\), \(3\Z / 12\Z\) and \(4\Z / 12\Z\).
+  Under the correspondence, they give the subgroups \(12\mathbb{Z}\), \(2\mathbb{Z} / 12\mathbb{Z}\), \(3\mathbb{Z} / 12\mathbb{Z}\) and \(4\mathbb{Z} / 12\mathbb{Z}\).
   %
-  There is a surjective group homomorphism \(2\Z / 12\Z \to \Z/6\Z\) mapping \(2n(12\Z) \mapsto n(6Z)\).
+  There is a surjective group homomorphism \(2\mathbb{Z} / 12\mathbb{Z} \to \mathbb{Z}/6\mathbb{Z}\) mapping \(2n(12\mathbb{Z}) \mapsto n(6Z)\).
   %
-  It is well defined as if \(2m(12\Z) = 2n(12\Z)\) then \(m(6\Z) = n(6\Z)\) and it is easy to show that it is a group homomorphism.
+  It is well defined as if \(2m(12\mathbb{Z}) = 2n(12\mathbb{Z})\) then \(m(6\mathbb{Z}) = n(6\mathbb{Z})\) and it is easy to show that it is a group homomorphism.
   %
-  Theorem~\ref{thm:group-theory:first-isomorphism-theorem} gives us that \((2\Z) / (12\Z) \iso \Z/6\Z\), and likewise, \((m\Z) / (n\Z) \iso \Z/(\frac n m)\Z\).
+  Theorem~\ref{thm:group-theory:first-isomorphism-theorem} gives us that \((2\mathbb{Z}) / (12\mathbb{Z}) \cong \mathbb{Z}/6\mathbb{Z}\), and likewise, \((m\mathbb{Z}) / (n\mathbb{Z}) \cong \mathbb{Z}/(\frac n m)\mathbb{Z}\).
 #+end_ex
 
 The Third Isomorphism Theorem tells us how to work with groups of the form \((G/N)/(H/N)\).
@@ -522,7 +527,7 @@ The Third Isomorphism Theorem tells us how to work with groups of the form \((G/
 #+begin_theorem [The Third Isomorphism Theorem]
   \label{thm:group-theory:the-third-isomorphism-theorem}
   If \(N \leq H \leq G\), with \(N, H \triangleleft G\), then
-  \[(G/N)/(H/N) \iso G/H.\]
+  \[(G/N)/(H/N) \cong G/H.\]
 #+end_theorem
 
 #+begin_proof
@@ -546,7 +551,7 @@ The Third Isomorphism Theorem tells us how to work with groups of the form \((G/
   %
   Then, \(e = \pi(gN) = \can_{H}(g)\), so \(g \in H\) which means that \(gN \in H/N\).
   %
-  This shows that \(H/N = \ker(\pi)\) and so \((G/N) / (H/N) \iso G/H\).
+  This shows that \(H/N = \ker(\pi)\) and so \((G/N) / (H/N) \cong G/H\).
 #+end_proof
 
 What can we say about subgroups of \(H \leq G\) that don't contain the normal subgroup \(N\)?
@@ -557,7 +562,7 @@ Let \(N \triangleleft G\) be a normal subgroup of a group \(G\) and  \(H \leq G\
 1. \(HN \coloneqq \{hn \mid h \in H, n \in N\}\) is a subgroup of \(G\);
 2. \(N \triangleleft HN\);
 3. \(H \cap N \triangleleft H\);
-4. There exists an isomorphism \(HN/N \iso H/(H\cap N)\).
+4. There exists an isomorphism \(HN/N \cong H/(H\cap N)\).
 #+end_theorem
 
 #+begin_proof
@@ -573,25 +578,25 @@ and so \(HN \leq G\).
 
 4. By the Correspondence Theorem (Theorem~\ref{thm:group-theory:the-correspondence-theorem}) and \(N \subset HN\), we have a group homomorphism \(\can_{N}|_{H}: H \to H/N\). The kernel of this map is the set \(\{n \in H \mid n \in N\} = N \cap H\), and the image is \(HN/N\) (follows from \(hN = heN \in HN/N\) and \(hnN = hN\)). Hence, the First Isomorphism Theorem (Theorem~\ref{thm:group-theory:first-isomorphism-theorem}) gives an isomorphism
 
-\[H/(H\cap N) \iso HN/N.\]
+\[H/(H\cap N) \cong HN/N.\]
 #+end_proof
 
 #+begin_corollary
-Let \(a,b \in \Z\). Then, \(ab = \gcd(a,b)\lcm(a,b)\).
+Let \(a,b \in \mathbb{Z}\). Then, \(ab = \gcd(a,b)\lcm(a,b)\).
 #+end_corollary
 
 #+begin_proof
-We take the function \(\can_{b}|_{a\Z} : a\Z \to Z / b\Z\). The first isomorphism theorem gives
+We take the function \(\can_{b}|_{a\mathbb{Z}} : a\mathbb{Z} \to Z / b\mathbb{Z}\). The first isomorphism theorem gives
 
-  \[\can_{b}|_{a\Z}(a\Z) \iso a\Z / (a\Z \cap b\Z) \iso a\Z / \lcm(a,b)\Z.\]
+  \[\can_{b}|_{a\mathbb{Z}}(a\mathbb{Z}) \cong a\mathbb{Z} / (a\mathbb{Z} \cap b\mathbb{Z}) \cong a\mathbb{Z} / \lcm(a,b)\mathbb{Z}.\]
 
 Applying the Second Isomorphism Theorem (Theorem~\ref{thm:group-theory:second-isomorphism-theorem}) to the middle term in the isomorphism chain, we get that
 
-  \[a\Z / a\Z \cap b\Z \iso a\Z b\Z / a\Z \iso (a\Z + b\Z)\Z / b\Z \iso \gcd(a,b) \Z / b\Z.\]
+  \[a\mathbb{Z} / a\mathbb{Z} \cap b\mathbb{Z} \cong a\mathbb{Z} b\mathbb{Z} / a\mathbb{Z} \cong (a\mathbb{Z} + b\mathbb{Z})\mathbb{Z} / b\mathbb{Z} \cong \gcd(a,b) \mathbb{Z} / b\mathbb{Z}.\]
 
   This gives an isomorphism
 
-  \[a\Z/ \lcm(a,b)\Z \iso \gcd(a,b)\Z/ b\Z.\]
+  \[a\mathbb{Z}/ \lcm(a,b)\mathbb{Z} \cong \gcd(a,b)\mathbb{Z}/ b\mathbb{Z}.\]
 
   The left hand side has cardinality \(\lcm(a,b)/a\), while the right hand side's cardinality is \(b/\gcd(a,b)\). This means \(ab = \gcd(a,b)\lcm(a,b)\), as required.
 #+end_proof
@@ -1028,7 +1033,7 @@ This section will present results about characterising finitely generated abelia
 
 #+begin_theorem
   Suppose that \(A\) is a finite abelian group of order \(n\) and that \(n = p_{1}^{s_{1}}p_{2}^{s_{2}} \ldots p_{t}^{s_{t}}\), for distinct primes \(p_{i}\). Let \(A_{p_{i}}\) be the unique Sylow \(p_{i}\)-subgroup of \(A\). Then
-  \[A \iso A_{p_{1}} \times A_{p_{2}} \times \ldots \times A_{p_{t}}.\]
+  \[A \cong A_{p_{1}} \times A_{p_{2}} \times \ldots \times A_{p_{t}}.\]
   That is, \(A\) is isomorphic to the direct products of its Sylow subgroups.
 #+end_theorem
 
@@ -1042,7 +1047,7 @@ This section will present results about characterising finitely generated abelia
 #+end_theorem
 
 #+begin_theorem [Chinese Remainder Theorem]
-  Let \(m, n\) be non-zero coprime integers. Then \(C_{mn} \iso C_{m} \times C_{n}\).
+  Let \(m, n\) be non-zero coprime integers. Then \(C_{mn} \cong C_{m} \times C_{n}\).
 #+end_theorem
 
 #+begin_corollary [Fundamental Theorem of Finite Abelian Groups, II] \label{cor:group-theory:fundamental-theorem-of-finite-abelian-groups-II}
@@ -1221,8 +1226,8 @@ This section is about unique factorisation for groups.
 #+begin_ex
 Here are some examples of composition series:
 
-1. \(\{0\} \triangleleft 4 \Z / 12 \Z \triangleleft 2\Z / 12\Z \triangleleft \Z/12\Z\).
-2. \(\{0\} \triangleleft 6 \Z / 12 \Z \triangleleft 3\Z / 12\Z \triangleleft \Z/12\Z\).
+1. \(\{0\} \triangleleft 4 \mathbb{Z} / 12 \mathbb{Z} \triangleleft 2\mathbb{Z} / 12\mathbb{Z} \triangleleft \mathbb{Z}/12\mathbb{Z}\).
+2. \(\{0\} \triangleleft 6 \mathbb{Z} / 12 \mathbb{Z} \triangleleft 3\mathbb{Z} / 12\mathbb{Z} \triangleleft \mathbb{Z}/12\mathbb{Z}\).
 #+end_ex
 
 #+begin_theorem [Jordan Holder]\label{thm:group-theory:Jordan-Holder}
@@ -1252,7 +1257,7 @@ Let \(G\) be a finite group. Then \(G\) is isomorphic to one of:
 
 #+begin_proof
   As each \(H_{i}\) is a subgroup of \(G/N\), the~\nameref{thm:group-theory:the-correspondence-theorem} gives us that \(\can^{-1}(H_{i})\) is a subgroup of \(G\) containing \(N\). Defining \(G_{s + i} \coloneqq \can^{-1}(H_{i})\), we see that since \(H_{i} \triangle H_{i+1}\), \(G_{s+i} \triangleleft G_{s+i+1}\). the~\nameref{thm:group-theory:the-third-isomorphism-theorem} then gives that
-  \[G_{s+i+1} / G_{s+i} \iso (G_{s+i+1} / N) / (G_{s + i} / N) \iso H_{i+1} / H_{i}.\]
+  \[G_{s+i+1} / G_{s+i} \cong (G_{s+i+1} / N) / (G_{s + i} / N) \cong H_{i+1} / H_{i}.\]
   By assumption, \(H_{i+1} / H_{i}\) is simple, and so \(G_{0} \triangleleft \ldots G_{s+r} = G\) is a composition series for \(G\).
 #+end_proof
 
@@ -1274,7 +1279,7 @@ The proof of uniqueness looks like a real pain. I will omit it for now.
   \[\{e\} = G_{0} \triangleleft \ldots \triangleleft G_{s} = G\]
   and
   \[\{e\} = H_{0} \triangleleft \ldots \triangleleft H_{r} = G\]
-  are two composition series for \(G\), then \(s = r\) and there is a permutation \(\sigma\) of \(\{0, \ldots, s-1\}\) such that \(H_{i+1}/H_{i} \iso G_{\sigma(i) + 1} / G_{\sigma(i)}\), for all \(i = 0, \ldots, s-1\).
+  are two composition series for \(G\), then \(s = r\) and there is a permutation \(\sigma\) of \(\{0, \ldots, s-1\}\) such that \(H_{i+1}/H_{i} \cong G_{\sigma(i) + 1} / G_{\sigma(i)}\), for all \(i = 0, \ldots, s-1\).
 #+end_theorem
 
 
@@ -1285,6 +1290,8 @@ Solvable groups are groups that can be built up using compositions series, from 
 #+begin_definition
   Let \(G\) be a group. A \indx{subnormal series} for \(G\) is a series of subgroups
   \[\{e\} = G_{0} \triangleleft \ldots \triangleleft G_{s} = G\]
+
+ ref:Group 
 #+end_definition
 
 #+begin_definition
@@ -1443,36 +1450,36 @@ Solvability is related to composition series.
   We need to take theta \(\mod 2 \pi\) to make the homomorphism injective.
 
   \begin{question}
-    Consider \(\Z\) and \(\R\) as groups under addiction. Prove that \(\R / \Z \iso \mu\).
+    Consider \(\mathbb{Z}\) and \(\R\) as groups under addiction. Prove that \(\R / \mathbb{Z} \cong \mu\).
   \end{question}
 
   \begin{solution}
-    Take the function \(x \mapsto e^{ix2\pi}\) from \(\R \to \mu\). This is a surjective group homomorphism with kernel equal to \(\Z\). The~\nameref{thm:group-theory:first-isomorphism-theorem} gives us \(\R/\Z \iso \mu\).
+    Take the function \(x \mapsto e^{ix2\pi}\) from \(\R \to \mu\). This is a surjective group homomorphism with kernel equal to \(\mathbb{Z}\). The~\nameref{thm:group-theory:first-isomorphism-theorem} gives us \(\R/\mathbb{Z} \cong \mu\).
   \end{solution}
 
   \begin{question}
-    Find all subgroups of \(\Z, +\) that contain \(60\Z\) and find all subgroups of \(\Z / 60\Z\) and draw a diagram indicating the inclusions among the subgroups.
+    Find all subgroups of \(\mathbb{Z}, +\) that contain \(60\mathbb{Z}\) and find all subgroups of \(\mathbb{Z} / 60\mathbb{Z}\) and draw a diagram indicating the inclusions among the subgroups.
   \end{question}
 
   \begin{solution}
-    We use the~\nameref{thm:group-theory:the-correspondence-theorem} to map between subgroups of \(\Z/60\Z\) and subgroups containing \(60\Z\).
+    We use the~\nameref{thm:group-theory:the-correspondence-theorem} to map between subgroups of \(\mathbb{Z}/60\mathbb{Z}\) and subgroups containing \(60\mathbb{Z}\).
     \begin{center}
       \begin{tikzcd}
-        & 60\Z                                                           &                                                               &                                            &                                               & \Z/60\Z                                                           &                                                                   &                                               \\
-        12\Z \arrow[ru, no head]                   & 20\Z \arrow[u, no head]                                        & 30\Z \arrow[lu, no head]                                      &                                            & \Z/12\Z \arrow[ru, no head]                   & \Z/20\Z \arrow[u, no head]                                        & \Z/30\Z \arrow[lu, no head] \arrow[ld, no head]                   &                                               \\
-        4\Z \arrow[u, no head] \arrow[ru, no head] & 6\Z \arrow[lu, no head] \arrow[ru, no head]                    & 10\Z \arrow[lu, no head] \arrow[u, no head]                   & 15\Z \arrow[lu, no head]                   & \Z/4\Z \arrow[u, no head] \arrow[ru, no head] & \Z/6\Z \arrow[lu, no head]                                        & \Z/10\Z \arrow[u, no head] \arrow[lu, no head]                    & \Z/15\Z \arrow[lu, no head]                   \\
-        & 2\Z \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] & 3\Z \arrow[lu, no head] \arrow[ru, no head]                   & 5\Z \arrow[lu, no head] \arrow[u, no head] &                                               & \Z/2\Z \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] & \Z/3\Z \arrow[u, no head] \arrow[ru, no head] \arrow[lu, no head] & \Z/5\Z \arrow[lu, no head] \arrow[u, no head] \\
-        &                                                                & \Z \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] &                                            &                                               &                                                                   & \{e\} \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head]  &
+        & 60\mathbb{Z}                                                           &                                                               &                                            &                                               & \mathbb{Z}/60\mathbb{Z}                                                           &                                                                   &                                               \\
+        12\mathbb{Z} \arrow[ru, no head]                   & 20\mathbb{Z} \arrow[u, no head]                                        & 30\mathbb{Z} \arrow[lu, no head]                                      &                                            & \mathbb{Z}/12\mathbb{Z} \arrow[ru, no head]                   & \mathbb{Z}/20\mathbb{Z} \arrow[u, no head]                                        & \mathbb{Z}/30\mathbb{Z} \arrow[lu, no head] \arrow[ld, no head]                   &                                               \\
+        4\mathbb{Z} \arrow[u, no head] \arrow[ru, no head] & 6\mathbb{Z} \arrow[lu, no head] \arrow[ru, no head]                    & 10\mathbb{Z} \arrow[lu, no head] \arrow[u, no head]                   & 15\mathbb{Z} \arrow[lu, no head]                   & \mathbb{Z}/4\mathbb{Z} \arrow[u, no head] \arrow[ru, no head] & \mathbb{Z}/6\mathbb{Z} \arrow[lu, no head]                                        & \mathbb{Z}/10\mathbb{Z} \arrow[u, no head] \arrow[lu, no head]                    & \mathbb{Z}/15\mathbb{Z} \arrow[lu, no head]                   \\
+        & 2\mathbb{Z} \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] & 3\mathbb{Z} \arrow[lu, no head] \arrow[ru, no head]                   & 5\mathbb{Z} \arrow[lu, no head] \arrow[u, no head] &                                               & \mathbb{Z}/2\mathbb{Z} \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] & \mathbb{Z}/3\mathbb{Z} \arrow[u, no head] \arrow[ru, no head] \arrow[lu, no head] & \mathbb{Z}/5\mathbb{Z} \arrow[lu, no head] \arrow[u, no head] \\
+        &                                                                & \mathbb{Z} \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head] &                                            &                                               &                                                                   & \{e\} \arrow[lu, no head] \arrow[u, no head] \arrow[ru, no head]  &
       \end{tikzcd}
     \end{center}
   \end{solution}
 
   \begin{question}
-    Let \(Z\) denote the centre of \(SL(n, K)\). Then the \indx{projective special linear group} \(PSL(n, K)\) is defined to be the quotient group \(SL(n, K) / Z\). Find the centre \(Z\) of \(SL(2, \Z_{3})\). What is the order of \(PSL(2, \Z_{3})\).
+    Let \(Z\) denote the centre of \(SL(n, K)\). Then the \indx{projective special linear group} \(PSL(n, K)\) is defined to be the quotient group \(SL(n, K) / Z\). Find the centre \(Z\) of \(SL(2, \mathbb{Z}_{3})\). What is the order of \(PSL(2, \mathbb{Z}_{3})\).
   \end{question}
 
   \begin{solution}
-    Recall that the centre of a group is exactly the set of elements that commute with all other elements in the groups. The centre of \(SL(2, \Z_{3})\) consists of all matrices... % TODO:finish this solution
+    Recall that the centre of a group is exactly the set of elements that commute with all other elements in the groups. The centre of \(SL(2, \mathbb{Z}_{3})\) consists of all matrices... % TODO:finish this solution
   \end{solution}
 
   \begin{question}
@@ -1497,7 +1504,7 @@ Solvability is related to composition series.
   \end{question}
 
   \begin{solution}
-    To see that \(G \times \{e_{H}\}\) is normal, we see that it is the kernel of the map \((g,h) \mapsto h\) from \(G \times H \to H\). It is clear that it is isomorphic to \(G\) and that the map is surjective. By the~\nameref{thm:group-theory:first-isomorphism-theorem}, \((g \times H) / G \times \{e_{H}\} \iso H\).
+    To see that \(G \times \{e_{H}\}\) is normal, we see that it is the kernel of the map \((g,h) \mapsto h\) from \(G \times H \to H\). It is clear that it is isomorphic to \(G\) and that the map is surjective. By the~\nameref{thm:group-theory:first-isomorphism-theorem}, \((g \times H) / G \times \{e_{H}\} \cong H\).
   \end{solution}
 \end{questions}
 
