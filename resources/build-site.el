@@ -18,7 +18,7 @@
 (require 'org-roam)
 
 
-;; (setq 'org-export-before-parsing-hook '(org-ref-refproc))
+;; (add-to-list 'org-export-before-parsing-hook 'org-ref-refproc)
 
 ;; Very simplified version of org-ref-export-to from org-ref-export.el
 ;; that export to filename
@@ -29,8 +29,7 @@
      (org-ref-process-buffer backend subtreep)
      (org-export-to-file backend filename
              async subtreep visible-only
-             body-only info)
-     ))
+             body-only info)))
 
 ;; org-html-publish-to-html from ox-html.el adapted to org-ref
 ;; Instead of org-export-to-file calls org-ref-export-to-file-nomarks-noopen
@@ -80,6 +79,7 @@
       org-latex-to-html-convert-command (format "%s %s" (dired-make-absolute "resources/make-tex-frag.sh") "%i")
       org-html-prefer-user-labels t
       org-roam-directory (dired-make-absolute "content")
+      org-export-with-broken-links 'mark
       )
 
 (setq

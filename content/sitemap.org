@@ -4,7 +4,6 @@
 - [[file:alternating_group.org][Alternating Group]]
 - [[file:category_theory.org][Category Theory]]
 - [[file:dihedral_group.org][Dihedral group]]
-- [[file:group_theory.org][Group Theory]]
 - [[file:nietzsche.org][Nietzsche]]
 - [[file:symmetric_group.org][Symmetric Group]]
 - [[file:thus_spoke_zarathustra.org][Thus Spoke Zarathustra]]

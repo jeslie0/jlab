@@ -83,7 +83,6 @@ The child then makes new values for itself.
 
 
 
-
 * References
 bibliography:bibliography.bib
 
