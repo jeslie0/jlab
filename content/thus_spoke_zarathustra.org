@@ -2,6 +2,7 @@
 :ID:       bb30487a-2fe7-4910-a49f-4b149dd067e2
 :END:
 #+title: Thus Spoke Zarathustra
+#+filetags: :philosophy:
 
 Thus Spoke Zarathustra: A Book for all and None is a work of philosophical fiction written by German philosopher [[id:35905b70-c324-45f8-8f7c-ea459402bd73][Friedrick Nietzsche]]. It deals with ideas such as the Ubermensch, the death of God and the will to power.
 
@@ -81,8 +82,40 @@ The camel is bound by the rules of society and religion.
 The lion throws off these shackles (in particular, the "Thou Shalt"s of religion)
 The child then makes new values for itself.
 
+What I take from this is a description of some characteristics of the Ubermensch. The ability to create one's own values and deciding how to live your own life and act, not just follow what society and cultural norms say.
+
+I think there is a lot that can be said about this. It is important to understand that Nietzsche himself was brought up with a heavy Christian influence, which he later rejected. Rather than just follow the values given to him by religion, he sees it better to question them deeply and decide if they are worth keeping.
+
+I personally believe that disregarding a value /because/ it is part of society is not a proper way to live, since you are still being controlled by the society you reject. Ultimately, one should question values that exist and look within to see if they are worth keeping.
+
+What I am interested in is /how/ one goes about creating values.
+
+*** Of the Chairs of Virtue
+Zarathustra listens to a "wise man" talk about virtue and sleep.
+
+I didn't take much away from this chapter, apart from Zarathustra thinking the wise man to be a fool. The wise man describes the virtuous man who can sleep easily at night by not doing wrong. He gives fairly concrete examples of how to sleep well, essentially by listing 40 things that have been done well that day. This is in contrast to Zarathustra's teachings, which are much more vague and abstract.
+
+*** Of the Afterworldsmen
 
 
+*** Of the Despisers of the Body
+
+
+*** Of Joys and Passions
+Zarathustra talks of virtue here. To him, if a virtue is truly yours, it cannot belong to anyone else. If you try to name your virtue, then the virtue loses some of its potency.
+
+I like this quote which is used to describe virtue:
+#+begin_quote
+But this bird has built it nest beneath my roof: therefore I love and cherish it - now it sits there upon its golden eggs. [[cite:Page 64&Nietzsche1964-cq]] 
+#+end_quote
+
+I feel it is contradictory to the idea of creating your own values - the picture of a bird flying in and choosing you makes it seem like we don't have control over our values. However, maybe it alludes to how values can be created and formed - it often feels like values choose us. We just need to let them in and let them grow and love them.
+
+Zarathustra describes the importance of just having one virtue. Any more and they will fight, confuse and get in the way of each other. He describes a battle or way between virtues and asks if it is really such a bad thing?
+
+#+begin_quote
+Man is something that must be overcome: and for that reason you must love your virtues - for you will perish by them.[[cite:Page 65 &Nietzsche1964-cq ]]
+#+end_quote
 * References
 bibliography:bibliography.bib
 
